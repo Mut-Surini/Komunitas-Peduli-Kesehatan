@@ -1,4 +1,3 @@
-<<<<<<< HEAD:views/style.css
 body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100%;
@@ -6,121 +5,45 @@ body{
 }
 .container{
     width: 100%;
-    height: 500px;
 }
 .content{
     width: 40%;
-    float: left;
-}
-.content img{
-    width: 100%;    
-}
-.form{
-    width: 60%;
-    float: right;
-    background-color: #dbdbdb;
-}
-.form img{
-    width: 250px;
-    height: 200px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-.form ul{
-    list-style-type: none;
-    text-align: center;
-    padding: 100px;
-}
-.form ul li{
-    padding-bottom: 20px;
-}
-.form input{
-    border: 10px;
-    padding: 4px 11px;
-    border-radius: 2px;
-    font-size: 18px;
-    width: 400px;
-    height: 36px;
-    background-color: white;
-}
-
-.form button{
-    border: 0;
-    border-radius: 2px;
-    font-size: 18px;
-    width: 422px;
-    height: 44px;
-    background-color: rgb(240, 99, 99);
-    color: white;
-    transition: 0.5s;
-    cursor: pointer;
-}
-.form button:hover{
-    color: rgb(240, 99, 99);
-    font-weight: bold;
-    background-color: white;
-}
-.form p{
-    font-size: 20px;
-}
-.form a{
-    font-size: 20px;
-    color: rgb(240, 99, 99);
-    transition: 0.5s;
-    text-decoration: none;
-}
-
-.form a:hover{
-    color: white;
-    font-weight: bold;
-}
-
-
-=======
-body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 100%;
-    margin: 0;
-}
-.container{
-    width: 100%;
-}
-.content{
-    width: 39.8%;
     height: 500px;
     float: left;
     padding: 100px 0;
+    margin: 19.5px 0;
 }
 .content h1{
+    font-family: 'Roboto';
     color: rgb(240, 99, 99);
     text-align: center;
     margin-bottom: 20px;
-    font-style: italic;
 }
 .content img{
     width: 100%;
 }
 .form{
+    box-sizing: border-box;
+    padding: 50px;
     width: 60%;
+    height: 739px;
     float: right;
-    background-color: #dbdbdb;
+    background-color: #f8a3a8;
 }
-.form img{
+.form .image{
+    text-align: center;
+    padding: 20px;
+}
+.image img{
     width: 250px;
     height: 200px;
     padding-bottom: 30px;
+}
+.form .input-email{
     text-align: center;
+    padding: 0 20px 20px;
 }
-.form ul{
-    list-style-type: none;
-    text-align: center;
-    padding: 50px 100px;
-    margin: 35px 0;
-}
-.form ul li{
-    padding-bottom: 20px;
-}
-.form input{
+.form .input-email input{
     border: 10px;
     padding: 4px 11px;
     border-radius: 2px;
@@ -129,7 +52,24 @@ body{
     height: 36px;
     background-color: white;
 }
-.form button{
+.form .input-password{
+    text-align: center;
+    padding: 0 20px 20px;
+}
+.form .input-password input{
+    border: 10px;
+    padding: 4px 11px;
+    border-radius: 2px;
+    font-size: 18px;
+    width: 400px;
+    height: 36px;
+    background-color: white;
+}
+.form .submit{
+    padding: 0 20px 20px;
+    text-align: center;
+}
+.form .submit button{
     border: 0;
     border-radius: 2px;
     font-size: 18px;
@@ -137,25 +77,41 @@ body{
     height: 44px;
     background-color: rgb(240, 99, 99);
     color: white;
-    transition: 0.1s;
+    transition: 0.2s;
     cursor: pointer;
 }
-.form button:hover{
-    background-color: #2B6AFD;
+.form .submit button:hover{
+    background-color: #49b1f7;
 }
-.form p{
+.form .text{
+    text-align: center;
+}
+.form .text p{
     font-size: 20px;
 }
-.form a{
+.form .text a{
+    color: rgb(240, 99, 99);
+    text-decoration: none;
+}
+.form .text a:hover{
+    color: #49b1f7;
+}
+.form .forgot{
+    text-align: center;
+    padding: 0 20px 20px;
+}
+.form .forgot a{
     font-size: 20px;
     color: rgb(240, 99, 99);
-    transition: 0.1s;
+    transition: 0.2s;
     text-decoration: none;
 }
 
-.form a:hover{
-    color: #2B6AFD;
+.form .forgot a:hover{
+    color: #49b1f7;
+}
+.icon{
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 550;
 }
 
-
->>>>>>> 0f11270f18670b1eb469b38d8abaa54485ac6ca2:style.css
