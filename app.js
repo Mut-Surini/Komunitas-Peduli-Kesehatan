@@ -22,6 +22,8 @@ const transporter = nodemailer.createTransport({
 // End of Mailer transport
 
 
+
+
 // Flash Message npm
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -56,6 +58,12 @@ mongoose.connect('mongodb+srv://fajaradiputra127:fajar1234@cluster0.u62fkfd.mong
     useUnifiedTopology: true,
     useCreateIndex: true
 })
+
+const user = {
+    "nama" : "Dika"
+};
+
+const globalComments = require("./Server/Global/comments.json");
 
 // =======================
 
@@ -111,7 +119,7 @@ function upComments(server, user, pernyataan){
         return result;
     }
     
-    function isiResult(arr){
+    function isiResult(arr,result){
         arr.forEach(e => {
             result.push(e);
         });
@@ -126,10 +134,10 @@ function upComments(server, user, pernyataan){
         const arrayPernyataan3 = createArray3(comment);
         const arrayPernyataan4 = createArray4(comment);
     
-        isiResult(checkArray(arrayPernyataan));
-        isiResult(checkArray(arrayPernyataan2));
-        isiResult(checkArray(arrayPernyataan3));
-        isiResult(checkArray(arrayPernyataan4));
+        isiResult(checkArray(arrayPernyataan),result);
+        isiResult(checkArray(arrayPernyataan2),result);
+        isiResult(checkArray(arrayPernyataan3),result);
+        isiResult(checkArray(arrayPernyataan4),result);
     
         serverComments.push({
             nama,
@@ -415,13 +423,25 @@ app.post('/createServer', (req, res) => {
 
     createServer(req.body.nameServer, "User");
 
-    res.redirect(`/${req.body.nameServer}`);
+    res.redirect(`/server/${req.body.nameServer}`);
 })
 
 app.post('/joinServer', (req, res) => {
 
-    res.redirect(`/${req.body.nameServer}`);
+    res.redirect(`/server/${req.body.nameServer}`);
 })
+
+// app.post('/global', async (req, res) => {
+
+//     penyakit = await Penyakit.find({})
+
+//     upComments("global", user.nama, req.body.pernyataan);
+
+//     setTimeout(() => {
+//         res.render('index',{layout: false, globalComments, user});
+//     }, 500);
+
+// })
 // End of Auth
 
 app.get('/', (req, res) => {
@@ -579,9 +599,30 @@ app.get('/test',(req,res) => {
     }, 100)
     
 })
-app.get('/global', (req, res) => {
-    res.render('index',{layout: false});
+
+// app.get('/global', (req,res) => {
+
+//     res.render('index',{layout: false, globalComments, user});
+// })
+
+app.get('/penyakit/:nama', async (req,res) => {
+    penyakit = await Penyakit.find({})
+
+    penyakit.forEach(e => {
+        if(req.params.nama == e.nama){
+            console.log(e.nama, e.desk);
+        }
+    })
 })
+
+app.get('/server/:nama', (req,res) => {
+    const infoServer = require(`./Server/${req.params.nama}/info.json`);
+    const serverComments = require(`./Server/${req.params.nama}/comments.json`);
+
+    console.log(infoServer);
+
+    res.render('index', {layout: false, infoServer, serverComments, user})
+});
 
 app.get('/server', (req, res) => {
     res.render('server',{layout: false});
