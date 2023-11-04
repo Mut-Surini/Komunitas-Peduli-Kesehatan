@@ -72,7 +72,7 @@
                     <img class="w-20  mr-72" src="../img/logoH.png" alt="HealthCare">
                 </div>
                 <div class="my-auto">
-                    <button class="bg-red-500 px-10 py-3 rounded-full hover:bg-red-600 font-lato">Log out</button>
+                    <a class="bg-red-500 px-10 py-3 rounded-full hover:bg-red-600 font-lato" href="/logout">Log out</a>
                 </div>
             </nav>
         </header>
@@ -174,7 +174,14 @@
 
 
 <script>
+    let usr, email;
+        usr  = `<%= usr.username %>`
+        email  = `<%= usr.email %>`
+    usr  = JSON.parse('<%= usr.username %>')
+        email  = JSON.parse('<%= usr.email %>')
     (function(){
+        usr  = JSON.parse('<%= usr.username %>')
+        email  = JSON.parse('<%= usr.email %>')
         const message = document.querySelector('[name="message"]')
         const btn = document.querySelector('button[name="submit"]')
         const usrMsg = document.querySelector('.user-message')
