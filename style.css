@@ -55,12 +55,16 @@ body{
 .form .input-email input:focus{
     font-size: 12px;
 }
-.form .error{
+.error{
     padding: 0 30px 20px;
     text-align: right;
     width: 380px;
+    margin: auto;
+    text-align: left;
 }
-.form .error p{
+.form .error p,.error p{
+    margin: auto;
+    text-align: left;
     margin: 0;
     color: rgb(252, 62, 62);
 }
@@ -126,4 +130,3 @@ body{
     font-family: 'Font Awesome 6 Free';
     font-weight: 550;
 }
-
