@@ -4,9 +4,10 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./dist/output.css" />
-    <meta charset="utf-8">
+    <link type="text/tailwindcss" href="/css/output.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta charset="utf-8">
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+
     <!-- FONT -->
     <script>
         tailwind.config = {
@@ -45,7 +48,7 @@
             }
         }
         </style> -->
-    <title>HEALTH CARE | HOME</title>
+    <title>HEALTH CARE|HOME</title>
 </head>
 
 <body>
@@ -55,13 +58,13 @@
                 <div class="  md:min-h-fit min-h-[60vh] left-0 top-[9%] md:w-auto w-full flex item-center px-5 my-auto font-lato">
                     <ul class="flex md:flex-row flex-col md:item-center md:gap-[4vw] gap-[2vh]">
                         <li>
-                            <a class="text-red-700 font-bold" href="/global">Home</a>
+                            <a class="text-red-700 font-bold" href="index.html">Home</a>
                         </li>
                         <li>
-                            <a class="text-red-500" href="/server">Server</a>
+                            <a class="text-red-500" href="ServerPage.html">Server</a>
                         </li>
                         <li>
-                            <a class="text-red-500" href="/acc"> Account</a>
+                            <a class="text-red-500" href="structure"> Account</a>
                         </li>
                     </ul>
                 </div>
@@ -119,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end mb-4">
-                                <div>
+                                <div class="user-message">
                                     <div class="mr-2 py-3 px-4 bg-red-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                         INFO LOKERNYA DONGG
                                     </div>
@@ -157,8 +160,8 @@
                 </div>
                 <!-- end message -->
                 <div class="py-5 relative">
-                    <input class="w-full absolute border-red-400 border-y-4  border-x-4 hover:border-red-400 y-0 bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="Ketik Sesuatu..." />
-                    <button class="absolute right-0 bg-green-400 hover:bg-green-500 w-20 h-10 mt-3 mr-3 text-white rounded-full">Kirim</button>
+                    <input class="w-full absolute border-red-400 border-y-4  border-x-4 hover:border-red-400 y-0 bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="Ketik Sesuatu..." name="message" />
+                    <button class="absolute right-0 bg-green-400 hover:bg-green-500 w-20 h-10 mt-3 mr-3 text-white rounded-full" name="submit">Kirim</button>
                 </div>
 
             </div>
@@ -170,5 +173,25 @@
     </section>
 
 
+<script>
+    (function(){
+        const message = document.querySelector('[name="message"]')
+        const btn = document.querySelector('button[name="submit"]')
+        const usrMsg = document.querySelector('.user-message')
+        const socket = io.connect('http://localhost:3001')
 
+        btn.addEventListener('click', () => {
+            socket.emit('new_message', {message: message.value})
+        })
+        
+        socket.on('new_message',(data) => {
+            usrMsg.innerHTML += `<div class="mr-2 py-3 px-4 bg-red-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                        ${data.message}
+                                    </div>`
+        })
+        
+    })()
+    
+</script>
 </body>
+</html>
