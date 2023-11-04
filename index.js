@@ -1,18 +1,4 @@
 const fs = require("fs");
-const port = 3000;
-
-var express = require('express'),
-    expressLayouts = require('express-layouts'),
-    app = express();
-app.use(expressLayouts);
- 
-app.set('view engine', 'ejs');
-
-app.get('/home', function(req, res) {
-    res.render('index', {
-      layout: 'home-layout', // use home-layout
-    });
-});
 
 
 const penyakit = [{
@@ -210,10 +196,6 @@ function callComments(nama, kolom){
 }
 
 // callComments("Global");
-
-app.listen(port, () => {
-	console.log(`Listening to port ${port}`);
-});
 
 
 
