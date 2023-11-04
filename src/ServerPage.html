@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <meta charset="utf-8" />
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <section>
+      <header class="text-white bg-red-300">
+        <nav class="flex justify-between w-[92%] mx-auto text-2xl">
+          <div class="md:min-h-fit min-h-[60vh] left-0 top-[9%] md:w-auto w-full flex item-center px-5 my-auto font-lato">
+            <ul class="flex md:flex-row flex-col md:item-center md:gap-[4vw] gap-[2vh]">
+              <li>
+                <a class="text-red-500" href="index.html">Home</a>
+              </li>
+              <li>
+                <a class="text-red-700 font-bold" href="about">Server</a>
+              </li>
+              <li>
+                <a class="text-red-500" href="structure"> Account</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img class="w-20 mr-72" src="../img/logoH.png" alt="HealthCare" />
+          </div>
+          <div class="my-auto">
+            <button class="bg-red-500 px-10 py-3 rounded-full hover:bg-red-600 font-lato">Log out</button>
+          </div>
+        </nav>
+      </header>
+    </section>
+    <section>
+      <div class="container mx-auto">
+        <h1 class="text-4xl text-red-500 font-bold text-center mt-16">Pilih Server</h1>
+      </div>
+      <div class="text-center bg-red-300 mx-80 rounded-3xl mt-16">
+        <button class="x- mt-10 mb-5 text-center bg-red-500 text-2xl hover:bg-red-400 text-white w-1/2 h-20 rounded-3xl mx-auto">Global Server</button> <br />
+        <button class="mt-5 text-center item-center bg-red-500 text-2xl hover:bg-red-400 text-white w-1/2 h-20 rounded-3xl mx-auto">Create Server</button> <br />
+        <input type="text" class="text-center bg-white text-white mb-5 rounded-b-2xl w-1/3 mx-auto text-2xl h-10 hover:border-red-500" placeholder="Buat Server!" />
+        <br />
+        <button class="mt-5 text-center item-center bg-red-500 text-2xl hover:bg-red-400 text-white w-1/2 h-20 rounded-3xl mx-auto">Join Server</button> <br />
+        <input type="text" class="text-center bg-white text-white mb-10 rounded-b-2xl w-1/3 mx-auto text-2xl h-10 hover:border-red-500" placeholder="Masukkan Code Join!" />
+      </div>
+    </section>
+  </body>
+</html>
