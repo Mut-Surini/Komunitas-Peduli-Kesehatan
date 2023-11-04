@@ -38,38 +38,95 @@ const penyakit = [{
     "Beri tahu keluarga atau teman bila Anda atau anak Anda memiliki alergi susu sehingga mereka bisa membantu mencegahnya"]
 }];
 
-const user = {
-    nama : "Fitrah",
-    gender : "Laki Laki"
-}
+function upComments(server, user, pernyataan){
 
+    const urlServer = `./Server/${server}/comments.json`;
+    const serverComments = require(`./Server/${server}/comments.json`);
 
-const globalServerInfo = require("./Server/Global/info.json");
-const globalServerComments = "./Server/Global/comments.json";
-const newGlobalServerComments = require("./Server/Global/comments.json");
+    function createArray(pernyataan){
+        const array = pernyataan.split(' ');
+        return array;
+    }
 
-console.log(newGlobalServerComments);
-
-const pernyataan = "Aku punya penyakit alergi susu";
-
-function tambahKomentar(nama, comment){
-
-    newGlobalServerComments.push({
-        nama,
-        comment,
-        arrayComment : []
-    });
-
-    fs.writeFile(globalServerComments, JSON.stringify(newGlobalServerComments), function writeJSON(err) {
-        if (err) return console.log(err);
-        console.log("Add Comment Success");
-    });
+    function createArray2(pernyataan){
+        const array = pernyataan.split(' ');
+        const array2 = [];
+        for(i = 0; i < (array.length-1) ; i++){
+            array2.push(array[i] + ' ' + array[i+1]);
+        }
+        return array2;
+    }
     
+    function createArray3(pernyataan){
+        const array = pernyataan.split(' ');
+        const array3 = [];
+        for(i = 0; i < (array.length-1) ; i++){
+            array3.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2]);
+        }
+        return array3;
+    }
+    
+    function createArray4(pernyataan){
+        const array = pernyataan.split(' ');
+        const array4 = [];
+        for(i = 0; i < (array.length-1) ; i++){
+            array4.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2] + ' ' + array[i+3]);
+        }
+        return array4;
+    }
+
+    function checkArray(array){
+
+        const result = [];
+    
+        array.forEach(e => {
+        penyakit.forEach(f => {
+            if(e.toLowerCase() == f.nama.toLowerCase()){
+                result.push(f.nama);   
+            }
+        });
+        }); 
+    
+        return result;
+    }
+    
+    function isiResult(arr){
+        arr.forEach(e => {
+            result.push(e);
+        });
+    }
+    
+    function tambahKomentar(nama, comment){
+    
+        const result = [];
+    
+        const arrayPernyataan = createArray(comment);
+        const arrayPernyataan2 = createArray2(comment);
+        const arrayPernyataan3 = createArray3(comment);
+        const arrayPernyataan4 = createArray4(comment);
+    
+        isiResult(checkArray(arrayPernyataan));
+        isiResult(checkArray(arrayPernyataan2));
+        isiResult(checkArray(arrayPernyataan3));
+        isiResult(checkArray(arrayPernyataan4));
+    
+        serverComments.push({
+            nama,
+            comment,
+            arrayComment : result
+        });
+    
+        fs.writeFile(urlServer, JSON.stringify(serverComments), function writeJSON(err) {
+            if (err) return console.log(err);
+            console.log("Add Comment Success");
+        });
+        
+    }
+
+    tambahKomentar(user, pernyataan);
 }
 
-// tambahKomentar(user.nama, pernyataan);
-
-console.log(globalServerComments);
+upComments("Global", "Fitrah", "Aku juga mau");
 
 
 

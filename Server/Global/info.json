@@ -2,6 +2,7 @@
     {
         "namaServer" : "Global Server",
         "kodeServer" : 12345,
+        "admin" : "Fitrah",
         "users" : ["Fitrah", "Dika"]
     }
 ]

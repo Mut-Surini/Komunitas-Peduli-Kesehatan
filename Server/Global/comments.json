@@ -1,9 +1,1 @@
-[{
-    "nama" : "Fitrah",
-    "comment" : "Saya sedikit suka itu",
-    "arrayComment" : []
-},{
-    "nama" : "Dika",
-    "comment" :"Saya juga terkadang ",
-    "arrayComment" : []
-}]
+[{"nama":"Fitrah","comment":"Saya sedikit suka itu","arrayComment":[]},{"nama":"Dika","comment":"Saya juga terkadang ","arrayComment":[]},{"nama":"Dika","comment":"Tapi saya punya Abses otak gimana dong !! ","arrayComment":["Abses Otak"]},{"nama":"Fitrah","comment":"Aku juga mau","arrayComment":[]}]
