@@ -34,6 +34,8 @@ const flash = require('connect-flash')
 faker.locale = 'id_ID'
 const Schema = mongoose.Schema
 const app = express()
+const server = require('http').createServer(app);
+
 const csvWriter = require('csv-write-stream');
 const fs = require('fs');
 const { decode } = require('punycode')
@@ -322,7 +324,7 @@ app.post('/register',[body('username').isLength({min: 4}).withMessage('This fiel
     body('umur').isLength({min: 1}).withMessage('This field is required').isNumeric().withMessage('Masukkan angka yang valid!')],async(req,res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        return res.render('registration',{title: 'Blog - Register',layout: 'main-login-regis',data: req.body, errors: errors.array()})
+        return res.render('signup',{title: 'Blog - Register',layout: 'main-regis',data: req.body, errors: errors.array()})
     }
     const token = nanoid()
     await Token.create({token, email: req.body.email,type: 'activation'})
@@ -345,7 +347,7 @@ app.post('/login',[body('email').isLength({min: 1}).withMessage('This field is r
 }),body('password').isLength({min: 1}).withMessage('This field is required')],async(req,res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        return res.render('login',{title: 'Blog - Login', layout: 'main-login-regis', msg: req.flash('msg'),errors: errors.array(),data: req.body})
+        return res.render('sign',{title: 'Blog - Login', layout: 'main-login', msg: req.flash('msg'),errors: errors.array(),data: req.body})
     }
     const user = await User.findOne({email: req.body.email}).select('email name')
     // set jwt token
@@ -442,6 +444,7 @@ app.post('/joinServer', (req, res) => {
 //     }, 500);
 
 // })
+
 // End of Auth
 
 app.get('/', (req, res) => {
@@ -458,18 +461,18 @@ app.get('/register',(req,res,next) => {
     if(res.locals.login){
         return next()
     }
-    res.render('registration',{title: 'Blog - Register',layout: 'main-login-regis'})
+    res.render('signup',{title: 'Blog - Register',layout: 'main-regis'})
 })
 app.get('/login',(req,res) => {
     const token = req.cookies.access_token
     if(!token){
-        return res.render('login', {title: 'Blog - Login', layout: 'main-login-regis', msg: req.flash('msg')})
+        return res.render('sign', {title: 'Blog - Login', layout: 'main-login', msg: req.flash('msg')})
     }
     jwt.verify(token,'secret',(err,decoded) => {
         if(err){
             req.flash('msg','Your session has been expired')
             res.clearCookie('access_token')
-            return res.render('login', {title: 'Blog - Login', layout: 'main-login-regis', msg: req.flash('msg')})
+            return res.render('sign', {title: 'Blog - Login', layout: 'main-login', msg: req.flash('msg')})
         }else{
             return res.redirect('/')
         }
@@ -628,6 +631,10 @@ app.get('/server', (req, res) => {
     res.render('server',{layout: false});
 })
 
+app.get('/acc', (req, res) => {
+    res.render('account', {layout : false});
+})
+
 app.use('/',(req,res) => {
     res.statusCode = 404
     res.render('404',{title: 'Not Found', layout: '404'})
@@ -635,6 +642,13 @@ app.use('/',(req,res) => {
 
 
 
-app.listen(3000, () => {
+const io = require('socket.io')(server);
+io.on('connection', (socket) => { 
+    console.log('new user connected..')
+    socket.on('new_message', (data) => {
+        io.sockets.emit('new_message', {message: data.message})
+    })
+});
+server.listen(3000, () => {
     console.log('Server listening on port 3000..')
-})
+});

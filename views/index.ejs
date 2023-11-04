@@ -4,8 +4,14 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="../dist/output.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+=======
+    <link type="text/tailwindcss" href="/css/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+>>>>>>> d76a1748fa471c2921f9e86f1c30e4f31c975fe0
     <meta charset="utf-8">
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +20,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+
     <!-- FONT -->
     <script>
         tailwind.config = {
@@ -45,7 +53,11 @@
             }
         }
         </style> -->
+
     <title>CrussCure | <%= infoServer[0].namaServer %></title>
+    
+    <title>HEALTH CARE|HOME</title>
+
 </head>
 
 <body>
@@ -62,6 +74,7 @@
                         </li>
                         <li>
                             <a class="text-white text-base hover:font-bold hover:text-xl" href="/acc"> Account</a>
+
                         </li>
                     </ul>
                 </div>
@@ -164,6 +177,7 @@
                     </div>
                 </div>
                 <!-- end message -->
+<<<<<<< HEAD
                 <div class="py-5 relative ">
                     <form method="post">
                     <input class="text-pink-600 font-semibold w-full absolute border-purple-500 border-y-4 border-x-4 y-0 bg-gray-300 py-5 px-3 rounded-xl " type="text " placeholder="Ketik Sesuatu... " name="pernyataan" />
@@ -289,6 +303,10 @@
                     </div>
                     <!-- container -->
                     <br>
+                <div class="py-5 relative">
+                    <input class="w-full absolute border-red-400 border-y-4  border-x-4 hover:border-red-400 y-0 bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="Ketik Sesuatu..." name="message" />
+                    <button class="absolute right-0 bg-green-400 hover:bg-green-500 w-20 h-10 mt-3 mr-3 text-white rounded-full" name="submit">Kirim</button>
+
                 </div>
 
                 <div id="slider-2" class="container mx-auto">
@@ -465,5 +483,25 @@
     </section>
 
 
+<script>
+    (function(){
+        const message = document.querySelector('[name="message"]')
+        const btn = document.querySelector('button[name="submit"]')
+        const usrMsg = document.querySelector('.user-message')
+        const socket = io.connect('http://localhost:3001')
 
+        btn.addEventListener('click', () => {
+            socket.emit('new_message', {message: message.value})
+        })
+        
+        socket.on('new_message',(data) => {
+            usrMsg.innerHTML += `<div class="mr-2 py-3 px-4 bg-red-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                        ${data.message}
+                                    </div>`
+        })
+        
+    })()
+    
+</script>
 </body>
+</html>

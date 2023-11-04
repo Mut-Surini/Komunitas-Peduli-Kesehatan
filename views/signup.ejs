@@ -1,0 +1,105 @@
+<div class="container-signup">
+    <div class="sign">
+        <form method="post">
+            <img src="/image/medical-team.png" alt="">
+            <h1>Hallo Doc</h1>
+            <h2>SIGN UP TO JOIN</h2>
+            <div class="input-name">
+                <input type="text" name="username" placeholder="Nama Lengkap" value="<% if(typeof data != 'undefined'){ %><%= data.username %><% } %>" required>
+                <% if(typeof errors != 'undefined'){ %> 
+                    <% if(typeof errors.find(element => element.param == 'username') != 'undefined'){ %> 
+                        <div class="error" style="margin-top: -10px; margin-left: 0;">
+                            <p><%= errors.find(element => element.param == 'username').msg %></p>
+                        </div>
+                    <% } %> 
+                <% } %> 
+            </div>
+            <div class="input-email">
+                <input type="email" id="email" name="email" placeholder="E-mail" required value="<% if(typeof data != 'undefined'){ %><%= data.email %><% } %>"><label for="email">
+                    <% if(typeof errors != 'undefined'){ %> 
+                        <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
+                            <div class="error" style="margin-top: -10px; margin-left: 0;">
+                                <p><%= errors.find(element => element.param == 'email').msg %></p>
+                            </div>
+                        <% } %> 
+                    <% } %> 
+            </div>
+            <div class="input-password">
+                <input type="password" name="password" placeholder="Password" required value="<% if(typeof data != 'undefined'){ %><%= data.password %><% } %>">
+            </div>
+            <div class="input-repassword">
+                <input type="password" name="password2" placeholder="Repeat Password" required value="<% if(typeof data != 'undefined'){ %><%= data.password2 %><% } %>"> 
+            </div>
+            <% if(typeof errors != 'undefined'){ %> 
+                <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
+                        <p style="color: red; text-align: left; margin-top: 0; margin-left: 30px;"><%= errors.find(element => element.param == 'password').msg %></p>
+                <% } %> 
+            <% } %> 
+            <div class="role">
+                <select name="role" required>
+                    <option value="Role" hidden>Role</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Scientist">Scientist</option>
+                    <option value="None">None</option>
+                </select>
+            </div>
+            <div class="height">
+                <input type="number" id="height" name="tinggi" placeholder="Tinggi" required value="<% if(typeof data != 'undefined'){ %><%= data.tinggi %><% } %>">
+                <% if(typeof errors != 'undefined'){ %> 
+                    <% if(typeof errors.find(element => element.param == 'tinggi') != 'undefined'){ %> 
+                        <div class="error" style="margin-top: -10px; margin-left: 0;">
+                            <p><%= errors.find(element => element.param == 'tinggi').msg %></p>
+                        </div>
+                    <% } %> 
+                <% } %> 
+            </div>
+            <div class="weight">
+                <input type="number" id="weight" name="berat" placeholder="Berat" required value="<% if(typeof data != 'undefined'){ %><%= data.berat %><% } %>">
+                <% if(typeof errors != 'undefined'){ %> 
+                    <% if(typeof errors.find(element => element.param == 'berat') != 'undefined'){ %> 
+                        <div class="error" style="margin-top: -10px; margin-left: 0;">
+                            <p><%= errors.find(element => element.param == 'berat').msg %></p>
+                        </div>
+                    <% } %> 
+                <% } %> 
+            </div>
+            <div class="age">
+                <input type="number" id="age" name="umur" placeholder="Umur" required value="<% if(typeof data != 'undefined'){ %><%= data.umur %><% } %>">
+                <% if(typeof errors != 'undefined'){ %> 
+                    <% if(typeof errors.find(element => element.param == 'umur') != 'undefined'){ %> 
+                        <div class="error" style="margin-top: -10px; margin-left: 0;">
+                            <p><%= errors.find(element => element.param == 'umur').msg %></p>
+                        </div>
+                    <% } %> 
+                <% } %> 
+            </div>
+            <div class="goldar">
+                <select name="golDar" required>
+                    <option value="Golongan Darah" hidden>Golongan Darah</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="AB">AB</option>
+                    <option value="O">O</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="gender">
+                <label for="pria"><input type="radio" name="gender" id="pria" value="laki">Pria</label>
+                <label for="wanita"><input type="radio" name="gender" id="wanita" value="perempuan">Wanita</label>
+            </div>
+            <p>By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .</p>
+            <div class="submit">
+                <button type="submit">Submit</button>
+            </div>
+            <p>Already have account? <a href="/login">Login</a></p>
+        </form>
+    </div>
+</div>

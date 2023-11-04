@@ -41,7 +41,7 @@ body{
 }
 .form .input-email{
     text-align: center;
-    padding: 0 20px 20px;
+    padding: 0 20px 10px;
 }
 .form .input-email input{
     border: 10px;
@@ -51,6 +51,18 @@ body{
     width: 400px;
     height: 36px;
     background-color: white;
+}
+.form .input-email input:focus{
+    font-size: 12px;
+}
+.form .error{
+    padding: 0 30px 20px;
+    text-align: right;
+    width: 380px;
+}
+.form .error p{
+    margin: 0;
+    color: rgb(252, 62, 62);
 }
 .form .input-password{
     text-align: center;
