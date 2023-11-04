@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: rgb(240, 99, 99);
+    background-color: rgb(236, 72, 153);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .container-signup{
@@ -168,5 +168,5 @@ body{
     color: #2B6AFD;
 }
 .sign a:hover{
-    color: rgb(240, 99, 99);
+    color: rgb(239, 68, 68);
 }

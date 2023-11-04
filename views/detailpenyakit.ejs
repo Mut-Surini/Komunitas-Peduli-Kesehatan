@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style3.css">
+    <title>Detail Penyakit</title>
+    <style>
+        body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(236, 72, 153);
+}
+section {
+    background-color: #fff;
+
+    margin: 40px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+section:hover{
+    border: 1px solid rgb(236, 72, 153);
+}
+h2 {
+    color: rgb(236, 72, 153);
+    text-decoration: underline;
+}
+
+p {
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+.container{
+    margin: 0 300px;
+    background-color: #fff;
+}
+.sub-header{
+    background-color: rgb(245, 139, 192);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+.sub-header h1 {
+    padding: 20px;
+    margin: 0;
+    letter-spacing: 2px;
+}
+.sub-header2{
+
+}
+.sub-header3{
+
+}
+.sub-header4{
+    padding-bottom: 20px;
+}
+.sub-header4 section{
+    margin-bottom: 0;
+    
+}
+
+a {
+    display: inline;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10%;
+    line-break: auto;
+    font-weight: bold;
+    font-size: small;
+    text-decoration: none;
+    background-color: rgb(236, 72, 153);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sub-header">
+            <h1><%= penyakit.nama  %></h1>
+            <a href="/server/global">Back To Server</a>
+        </div>
+        <div class="desc">
+            <section>
+                <p><%= penyakit.desk  %></p>
+            </section>
+        </div>
+        <div class="sub-header2">
+            <section>
+                <h2>Gejala</h2>
+                <ul>
+                    <% penyakit.gejala.forEach(e => { %>
+                     <li><%= e %></li>
+                    <% }) %>
+                </ul>
+            </section>
+        </div>
+        <div class="sub-header3">
+            <section>
+                <h2>Pengobatan</h2>
+                <ul>
+                    <% penyakit.pengobatan.forEach(e => { %>
+                     <li><%= e %></li>
+                    <% }) %>
+                </ul>
+                </section>
+        </div>
+        <div class="sub-header4">
+            <section>
+                <h2>Pencegahan</h2>
+                <ul>
+                    <% penyakit.pencegahan.forEach(e => { %>
+                     <li><%= e %></li>
+                    <% }) %>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

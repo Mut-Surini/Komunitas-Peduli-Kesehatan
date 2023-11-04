@@ -433,17 +433,19 @@ app.post('/joinServer', (req, res) => {
     res.redirect(`/server/${req.body.nameServer}`);
 })
 
-// app.post('/global', async (req, res) => {
+app.post('/server/:nama', async (req, res) => {
+    const infoServer = require(`./Server/${req.params.nama}/info.json`);
+    const serverComments = require(`./Server/${req.params.nama}/comments.json`);
 
-//     penyakit = await Penyakit.find({})
+    penyakit = await Penyakit.find({})
 
-//     upComments("global", user.nama, req.body.pernyataan);
+    upComments(req.params.nama, user.nama, req.body.pernyataan);
 
-//     setTimeout(() => {
-//         res.render('index',{layout: false, globalComments, user});
-//     }, 500);
+    setTimeout(() => {
+        res.render('index',{layout: false, serverComments, user, infoServer});
+    }, 500);
 
-// })
+})
 
 // End of Auth
 
@@ -609,20 +611,15 @@ app.get('/test',(req,res) => {
 // })
 
 app.get('/penyakit/:nama', async (req,res) => {
-    penyakit = await Penyakit.find({})
 
-    penyakit.forEach(e => {
-        if(req.params.nama == e.nama){
-            console.log(e.nama, e.desk);
-        }
-    })
+    const penyakit = await Penyakit.findOne({nama: req.params.nama})
+
+    res.render('detailpenyakit',{layout: false, penyakit})
 })
 
 app.get('/server/:nama', (req,res) => {
     const infoServer = require(`./Server/${req.params.nama}/info.json`);
     const serverComments = require(`./Server/${req.params.nama}/comments.json`);
-
-    console.log(infoServer);
 
     res.render('index', {layout: false, infoServer, serverComments, user})
 });
