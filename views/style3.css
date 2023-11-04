@@ -3,29 +3,22 @@ body {
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
-}
-
-header {
     background-color: rgb(240, 99, 99);
-    color: #fff;
-    text-align: center;
-    padding: 20px;
 }
-header h1 {
-    padding: 20px;
-    margin: 0;
-    letter-spacing: 2px;
-}
-
 section {
     background-color: #fff;
-    margin: 20px;
+
+    margin: 40px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+section:hover{
+    border: 1px solid rgb(241, 139, 139);
+}
 h2 {
     color: rgb(240, 99, 99);
+    text-decoration: underline;
 }
 
 p {
@@ -35,4 +28,32 @@ p {
 ul {
     list-style-type: disc;
     padding-left: 20px;
+}
+.container{
+    margin: 0 300px;
+    background-color: #fff;
+}
+.sub-header{
+    background-color: rgb(241, 139, 139);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+.sub-header h1 {
+    padding: 20px;
+    margin: 0;
+    letter-spacing: 2px;
+}
+.sub-header2{
+
+}
+.sub-header3{
+
+}
+.sub-header4{
+    padding-bottom: 20px;
+}
+.sub-header4 section{
+    margin-bottom: 0;
+    
 }
