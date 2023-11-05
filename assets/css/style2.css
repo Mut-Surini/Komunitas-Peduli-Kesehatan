@@ -20,6 +20,8 @@ body{
     float: left;
 }
 .sign h1{
+    color:rgb(236, 72, 153);
+    font-size: 50px;
     line-height: 100px;
     margin-bottom: 20px;
 }

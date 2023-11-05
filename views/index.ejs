@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/image/LogoH.png" type="image/x-icon">
 
     <!-- FONT -->
     <script>
@@ -50,8 +51,6 @@
         </style> -->
 
     <title>CrussCure | <%= infoServer[0].namaServer %></title>
-    
-    <title>HEALTH CARE|HOME</title>
 
 </head>
 
@@ -74,10 +73,11 @@
                     </ul>
                 </div>
                 <div>
-                    <img class="w-20  mr-72" src="../assets/image/LogoH.png">
+                    <img class="w-20  mr-36" src="/image/LogoH.png">
                 </div>
                 <div class="my-auto">
-                    <button class="bg-pink-500 px-8 py-2 text-center border-white border-1 rounded-full hover:bg-pink-600 font-lato font-bold"><a href="/login">Log out</a></button>
+                    <button class="bg-pink-500 px-8 py-2 text-center border-white border-1 rounded-full hover:bg-pink-600 font-lato font-bold"><a href="/logout">Log out</a></button>
+
                 </div>
             </nav>
         </header>
@@ -140,8 +140,8 @@
                                     <div class="flex justify-end mb-4">
                                         <div>
                                             <!-- Nama Pengguna -->
-                                            <div class="ml-32 mt-5 text-white font-medium">
-                                                <h1 class="ml-5">Anda</h1>
+                                            <div class="mt-10 text-white font-medium">
+                                                <h1 class="ml-10">Anda</h1>
                                             </div>
                                             <!-- end Nama Pengguna -->
                                             <div class="flex justify-end mb-4">
@@ -303,7 +303,7 @@
                     <br>
 
                 <div id="slider-2" class="container mx-auto">
-                    <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url(https://images.unsplash.com/photo-1544144433-d50aff500b91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)">
+                    <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url('/image/kontol.jpg')">
 
                         <p class="font-bold text-sm uppercase">Crusaders</p>
                         <p class="text-3xl font-bold">CrussCure</p>
@@ -477,7 +477,14 @@
 
 
 <script>
+    let user, email;
+        usr  = `<%= user.username %>`
+        email  = `<%= user.email %>`
+    usr  = JSON.parse('<%= user.username %>')
+        email  = JSON.parse('<%= user.email %>')
     (function(){
+        usr  = JSON.parse('<%= user.username %>')
+        email  = JSON.parse('<%= user.email %>')
         const message = document.querySelector('[name="message"]')
         const btn = document.querySelector('button[name="submit"]')
         const usrMsg = document.querySelector('.user-message')

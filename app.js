@@ -61,9 +61,9 @@ mongoose.connect('mongodb+srv://fajaradiputra127:fajar1234@cluster0.u62fkfd.mong
     useCreateIndex: true
 })
 
-const user = {
-    "nama" : "Dika"
-};
+// const user = {
+//     "nama" : "Dika"
+// };
 
 const globalComments = require("./Server/Global/comments.json");
 
@@ -369,7 +369,7 @@ app.post('/login',[body('email').isLength({min: 1}).withMessage('This field is r
             httpOnly: true,
         })
     }
-    res.redirect('/login')
+    res.redirect('/server')
 })
 app.post('/forgotpassword',body('email').isLength({min: 1}).withMessage('This field is required').isEmail().withMessage('Insert a valid E-mail').custom(async value => {
     const user = await User.findOne({email: value})
@@ -436,13 +436,14 @@ app.post('/joinServer', (req, res) => {
 app.post('/server/:nama', async (req, res) => {
     const infoServer = require(`./Server/${req.params.nama}/info.json`);
     const serverComments = require(`./Server/${req.params.nama}/comments.json`);
+    const user = jwt.decode(req.cookies.access_token);
 
     penyakit = await Penyakit.find({})
 
-    upComments(req.params.nama, user.nama, req.body.pernyataan);
+    upComments(req.params.nama, user.data.name, req.body.pernyataan);
 
     setTimeout(() => {
-        res.render('index',{layout: false, serverComments, user, infoServer});
+        res.render('index',{layout: false, serverComments, infoServer, user: {nama: user.data.name, email: user.data.email}});
     }, 500);
 
 })
@@ -486,7 +487,7 @@ app.get('/logout',async(req,res,next) => {
         return next()
     }
     res.clearCookie('access_token')
-    res.redirect('/')
+    res.redirect('/login')
 })
 app.get('/auth/activation/:token',async(req,res,next) => {
     const token = await Token.findOne({token: req.params.token})
@@ -611,6 +612,10 @@ app.get('/test',(req,res) => {
 // })
 
 app.get('/penyakit/:nama', async (req,res) => {
+    const token = req.cookies.access_token
+    if(!token){
+        return res.redirect('/login')
+    }
 
     const penyakit = await Penyakit.findOne({nama: req.params.nama})
 
@@ -618,18 +623,36 @@ app.get('/penyakit/:nama', async (req,res) => {
 })
 
 app.get('/server/:nama', (req,res) => {
+    const token = req.cookies.access_token
+    if(!token){
+        return res.redirect('/login')
+    }
+
     const infoServer = require(`./Server/${req.params.nama}/info.json`);
     const serverComments = require(`./Server/${req.params.nama}/comments.json`);
+    const user = jwt.decode(req.cookies.access_token)
 
-    res.render('index', {layout: false, infoServer, serverComments, user})
+    res.render('index', {layout: false, infoServer, serverComments, user: {nama: user.data.name, email: user.data.email}})
 });
 
 app.get('/server', (req, res) => {
+    const token = req.cookies.access_token
+    if(!token){
+        return res.redirect('/login')
+    }
+
     res.render('server',{layout: false});
 })
 
-app.get('/acc', (req, res) => {
-    res.render('account', {layout : false});
+app.get('/acc', async (req, res) => {
+    const token = req.cookies.access_token
+    if(!token){
+        return res.redirect('/login')
+    }
+
+    const usr = jwt.decode(req.cookies.access_token)
+    const user = await User.findOne({name: usr.data.name})
+    res.render('account', {layout : false, user});
 })
 
 app.use('/',(req,res) => {

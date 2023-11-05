@@ -6,10 +6,10 @@
     <div class="form">
         <form method="post">
             <div class="image">
-                <img src="image/medical-team.png" alt="">
+                <img src="/image/LogoH.png" alt="">
             </div>
             <div class="input-email">
-                <input class="icon" type="email" name="email" placeholder="&#xf0e0;  Email" required>
+                <input type="email" name="email" placeholder="Email" required>
                 <% if(typeof errors != 'undefined'){ %> 
                     <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
                         <div class="error" style="margin-top: 10px;">
@@ -19,7 +19,7 @@
                 <% } %> 
             </div>
             <div class="input-password">
-                <input class="icon" type="password" name="password" placeholder="&#xf023;  Password" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <% if(typeof errors != 'undefined'){ %> 
                     <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
                         <div class="error" style="margin-top: 10px;">

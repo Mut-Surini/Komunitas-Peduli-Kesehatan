@@ -14,7 +14,6 @@ body{
     margin: 19.5px 0;
 }
 .content h1{
-    font-family: 'Roboto';
     color: rgb(236, 72, 153);
     text-align: center;
     margin-bottom: 20px;
@@ -35,7 +34,7 @@ body{
     padding: 20px;
 }
 .image img{
-    width: 250px;
+    width: 200px;
     height: 200px;
     padding-bottom: 30px;
 }
