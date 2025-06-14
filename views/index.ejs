@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../dist/output.css" />
+    <!-- <link rel="stylesheet" href="../dist/output.css" /> -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <meta charset="utf-8">
@@ -110,7 +110,7 @@
                     <div class=" text-center font-semibold text-2xl text-white"><%= infoServer[0].namaServer  %> Chat</div>
 
                 </div>
-                <div class=" max-h-80  flex flex-row justify-between relative overflow-y-scroll">
+                <div class=" max-h-80  flex flex-col justify-between relative overflow-y-scroll">
                     <div class="w-full px-5 flex flex-col justify-between">
                         <div class="flex flex-col mt-5">
 
@@ -132,10 +132,10 @@
                                             <div class="ml-5 -mt-1 text-white font-medium ">
                                                 <a class="ml-5  rounded-b-xl bg-pink-500 px-2 py-1 hover:text-pink-600" href="/penyakit/<%= f %>" target="_blank"><%= f  %></a>
                                             </div>
-                                        </div>
-                                        <% }) %>
-                        
-                                    <% } %>
+                                            <% }) %>
+                                            
+                                            <% } %>
+                                    </div>
                                 <% }else{ %>
                                     <div class="flex justify-end mb-4">
                                         <div>
@@ -145,11 +145,11 @@
                                             </div>
                                             <!-- end Nama Pengguna -->
                                             <div class="flex justify-end mb-4">
-                                            <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt="" />
-                                            <div class="mt-4 mr-25 py-3 px-4 bg-pink-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                                <%= e.comment %>
+                                                <div class="mt-4 mr-25 py-3 px-4 bg-pink-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                                    <%= e.comment %>
+                                                </div>
+                                                <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt="" />
                                             </div>
-                                        </div>
                                             <% if (e.arrayComment != []) { %>
                                              <% e.arrayComment.forEach(f => { %>
                                                 <div class="ml-36 mt-2 mb-5  text-white font-medium hover:text-slate-300 px-2 py-1  bg-slate-600 rounded-b-xl">
@@ -477,31 +477,143 @@
 
 
 <script>
-    let user, email;
-        usr  = `<%= user.username %>`
-        email  = `<%= user.email %>`
-    usr  = JSON.parse('<%= user.username %>')
-        email  = JSON.parse('<%= user.email %>')
-    (function(){
-        usr  = JSON.parse('<%= user.username %>')
-        email  = JSON.parse('<%= user.email %>')
-        const message = document.querySelector('[name="message"]')
-        const btn = document.querySelector('button[name="submit"]')
-        const usrMsg = document.querySelector('.user-message')
-        const socket = io.connect('http://localhost:3001')
+    // Get user data from server-side rendering
+    const userData = {
+        nama: '<%= user.nama %>',
+        email: '<%= user.email %>'
+    };
 
-        btn.addEventListener('click', () => {
-            socket.emit('new_message', {message: message.value})
-        })
-        
-        socket.on('new_message',(data) => {
-            usrMsg.innerHTML += `<div class="mr-2 py-3 px-4 bg-red-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                        ${data.message}
-                                    </div>`
-        })
-        
-    })()
+    // Get server name from URL
+    const serverName = window.location.pathname.split('/').pop();
+    let lastMessageCount = 0;
+
+    // Function to update messages in the UI
+    function updateMessages(messages) {
+        const messagesContainer = document.querySelector('.flex.flex-col.mt-5');
+        if (!messagesContainer) return;
+
+        messagesContainer.innerHTML = '';
+        messages.forEach(e => {
+            if (e.nama != userData.nama) {
+                messagesContainer.innerHTML += `
+                    <div class="container justify-end mb-4">
+                        <div class="ml-8 -mt-3 text-white font-medium">
+                            <h1 class="ml-5">${e.nama}</h1>
+                        </div>
+                        <div class="flex justify-start mb-4">
+                            <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt="" />
+                            <div class="ml-2 py-3 px-4 bg-gray-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                                ${e.comment}
+                            </div>
+                        </div>
+                        ${e.arrayComment && e.arrayComment.length > 0 ? e.arrayComment.map(f => `
+                            <div class="ml-5 -mt-1 text-white font-medium">
+                                <a class="ml-5 rounded-b-xl bg-pink-500 px-2 py-1 hover:text-pink-600" href="/penyakit/${f}" target="_blank">${f}</a>
+                            </div>
+                        `).join('') : ''}
+                    </div>
+                `;
+            } else {
+                messagesContainer.innerHTML += `
+                    <div class="flex justify-end mb-4">
+                        <div>
+                            <div class="mt-10 text-white font-medium">
+                                <h1 class="ml-10">Anda</h1>
+                            </div>
+                            <div class="flex justify-end mb-4">
+                                <div class="mt-4 mr-25 py-3 px-4 bg-pink-500 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                    ${e.comment}
+                                </div>
+                                <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt="" />
+                            </div>
+                            ${e.arrayComment && e.arrayComment.length > 0 ? e.arrayComment.map(f => `
+                                <div class="ml-36 mt-2 mb-5 text-white font-medium hover:text-slate-300 px-2 py-1 bg-slate-600 rounded-b-xl">
+                                    <a href="/penyakit/${f}" target="_blank">${f}</a>
+                                </div>
+                            `).join('') : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        lastMessageCount = messages.length;
+        // Scroll to bottom after updating messages
+        const chatContainer = document.querySelector('.max-h-80');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    }
     
+    // Function to fetch messages
+    function fetchMessages() {
+        fetch(`/api/messages/${serverName}`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data.messages && data.messages.length > lastMessageCount) {
+                updateMessages(data.messages);
+            }
+        })
+        .catch(error => console.error('Error fetching messages:', error));
+    }
+
+    // Start polling every 2 seconds
+    setInterval(fetchMessages, 2000);
+
+    // Initial fetch
+    fetchMessages();
+
+    // Handle form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        
+        const input = this.querySelector('input[name="pernyataan"]');
+        const message = input.value.trim();
+        
+        if (!message) return;
+
+        try {
+            // Create URLSearchParams for proper form data encoding
+            const formData = new URLSearchParams();
+            formData.append('pernyataan', message);
+
+            const response = await fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData.toString()
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to send message');
+            }
+
+            const data = await response.json();
+            
+            if (data.success) {
+                input.value = ''; // Clear the input
+                if (data.messages) {
+                    updateMessages(data.messages);
+                } else {
+                    fetchMessages();
+                }
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert(error.message || 'Failed to send message. Please try again.');
+        }
+    });
 </script>
 </body>
 </html>

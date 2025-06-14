@@ -88,16 +88,20 @@ a {
         </div>
         <div class="desc">
             <section>
-                <p><%= penyakit.desk  %></p>
+                <p><%= penyakit.desk || 'Tidak ada deskripsi' %></p>
             </section>
         </div>
         <div class="sub-header2">
             <section>
                 <h2>Gejala</h2>
                 <ul>
-                    <% penyakit.gejala.forEach(e => { %>
-                     <li><%= e %></li>
-                    <% }) %>
+                    <% if (penyakit.gejala && Array.isArray(penyakit.gejala)) { %>
+                        <% penyakit.gejala.forEach(e => { %>
+                            <li><%= e %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>Tidak ada data gejala</li>
+                    <% } %>
                 </ul>
             </section>
         </div>
@@ -105,9 +109,13 @@ a {
             <section>
                 <h2>Pengobatan</h2>
                 <ul>
-                    <% penyakit.pengobatan.forEach(e => { %>
-                     <li><%= e %></li>
-                    <% }) %>
+                    <% if (penyakit.pengobatan && Array.isArray(penyakit.pengobatan)) { %>
+                        <% penyakit.pengobatan.forEach(e => { %>
+                            <li><%= e %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>Tidak ada data pengobatan</li>
+                    <% } %>
                 </ul>
                 </section>
         </div>
@@ -115,9 +123,13 @@ a {
             <section>
                 <h2>Pencegahan</h2>
                 <ul>
-                    <% penyakit.pencegahan.forEach(e => { %>
-                     <li><%= e %></li>
-                    <% }) %>
+                    <% if (penyakit.pencegahan && Array.isArray(penyakit.pencegahan)) { %>
+                        <% penyakit.pencegahan.forEach(e => { %>
+                            <li><%= e %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>Tidak ada data pencegahan</li>
+                    <% } %>
                 </ul>
             </section>
         </div>

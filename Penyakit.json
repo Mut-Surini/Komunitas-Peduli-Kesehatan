@@ -899,11 +899,10 @@
  }, {
   "nama" :"Anemia Defisiensi Besi",
   "desk" :"Anemia defisiensi besi adalah salah satu jenis anemia yang terjadi akibat tubuh kekurangan zat besi. Kondisi ini mengakibatkan penurunan jumlah sel darah merah yang sehat dalam tubuh.",
-  "gejala" :[Kurang mengonsumsi makanan yang mengandung zat besi
-  Mengalami gangguan penyerapan pada saluran cerna (malabsorpsi) sehingga tidak bisa menyerap zat besi dengan optimal
-  Mengalami perdarahan
-  Sedang hamil sehingga membutuhkan lebih banyak zat besi
-  Menderita gagal ginjal kronis],
+  "gejala" :["Kurang mengonsumsi makanan yang mengandung zat besi","Mengalami gangguan penyerapan pada saluran cerna (malabsorpsi) sehingga tidak bisa menyerap zat besi dengan optimal",
+  "Mengalami perdarahan",
+  "Sedang hamil sehingga membutuhkan lebih banyak zat besi",
+  "Menderita gagal ginjal kronis"],
   "pengobatan" :[],
   "pencegahan" :[]
  }, {
@@ -2652,5 +2651,5 @@
   "gejala" :[],
   "pengobatan" :[],
   "pencegahan" :[]
- },
+ }
 ]

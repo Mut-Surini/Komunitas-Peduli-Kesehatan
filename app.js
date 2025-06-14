@@ -55,31 +55,35 @@ mongoose.set('debug', function (collection, method, query, doc) {
 mongoose.connection.on('disconnected', function () {
     writer.end();
 });
-mongoose.connect('mongodb+srv://fajaradiputra127:fajar1234@cluster0.u62fkfd.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://fajaradiputra127:fajar1234@cluster0.j0kjnnx.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 })
 
-// const user = {
-//     "nama" : "Dika"
-// };
 
 const globalComments = require("./Server/Global/comments.json");
+let penyakit = require("./Penyakit.json");
 
 // =======================
 
 function upComments(server, user, pernyataan){
+    if (!pernyataan) {
+        console.error('No message provided');
+        return;
+    }
 
     const urlServer = `./Server/${server}/comments.json`;
     const serverComments = require(`./Server/${server}/comments.json`);
 
     function createArray(pernyataan){
-        const array = pernyataan.split(' ');
-        return array;
+        if (!pernyataan) return [];
+        // Only return the full string, no need to split into words
+        return [pernyataan];
     }
 
     function createArray2(pernyataan){
+        if (!pernyataan) return [];
         const array = pernyataan.split(' ');
         const array2 = [];
         for(i = 0; i < (array.length-1) ; i++){
@@ -89,69 +93,99 @@ function upComments(server, user, pernyataan){
     }
     
     function createArray3(pernyataan){
+        if (!pernyataan) return [];
         const array = pernyataan.split(' ');
         const array3 = [];
         for(i = 0; i < (array.length-1) ; i++){
-            array3.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2]);
+            if (array[i+2]) {
+                array3.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2]);
+            }
         }
         return array3;
     }
     
     function createArray4(pernyataan){
+        if (!pernyataan) return [];
         const array = pernyataan.split(' ');
         const array4 = [];
         for(i = 0; i < (array.length-1) ; i++){
-            array4.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2] + ' ' + array[i+3]);
+            if (array[i+3]) {
+                array4.push(array[i] + ' ' + array[i+1] + ' ' + array[i+2] + ' ' + array[i+3]);
+            }
         }
         return array4;
     }
 
     function checkArray(array){
-
-        const result = [];
+        if (!array || !array.length) return [];
+        const result = new Set(); // Use Set to automatically prevent duplicates
     
-        array.forEach(e => {
-        penyakit.forEach(f => {
-            if(e.toLowerCase() == f.nama.toLowerCase()){
-                result.push(f.nama);   
+        // Sort array by length in descending order to check longer phrases first
+        const sortedArray = [...array].sort((a, b) => b.length - a.length);
+    
+        sortedArray.forEach(e => {
+            if (e) {
+                const normalizedInput = e.toLowerCase().trim();
+                console.log('Checking input:', normalizedInput); // Debug log
+                
+                penyakit.forEach(f => {
+                    // Check disease name
+                    if(f && f.nama) {
+                        const normalizedDisease = f.nama.toLowerCase().trim();
+                        if(normalizedInput.includes(normalizedDisease)) {
+                            console.log('Found disease match:', f.nama); // Debug log
+                            result.add(f.nama);
+                        }
+                    }
+                    
+                    // Check symptoms
+                    if(f && f.gejala && Array.isArray(f.gejala)) {
+                        f.gejala.forEach(symptom => {
+                            if(symptom) {
+                                const normalizedSymptom = symptom.toLowerCase().trim();
+                                // Check if the input contains the symptom
+                                if(normalizedInput.includes(normalizedSymptom)) {
+                                    console.log('Found symptom match:', symptom, 'for disease:', f.nama); // Debug log
+                                    result.add(f.nama);
+                                }
+                            }
+                        });
+                    }
+                });
             }
-        });
         }); 
     
-        return result;
-    }
-    
-    function isiResult(arr,result){
-        arr.forEach(e => {
-            result.push(e);
-        });
+        console.log('Final result:', Array.from(result)); // Convert Set back to array for logging
+        return Array.from(result); // Convert Set back to array for return
     }
     
     function tambahKomentar(nama, comment){
+        if (!nama || !comment) {
+            console.error('Missing nama or comment');
+            return;
+        }
     
-        const result = [];
-    
-        const arrayPernyataan = createArray(comment);
-        const arrayPernyataan2 = createArray2(comment);
-        const arrayPernyataan3 = createArray3(comment);
-        const arrayPernyataan4 = createArray4(comment);
-    
-        isiResult(checkArray(arrayPernyataan),result);
-        isiResult(checkArray(arrayPernyataan2),result);
-        isiResult(checkArray(arrayPernyataan3),result);
-        isiResult(checkArray(arrayPernyataan4),result);
+        // Combine all arrays into one before checking
+        const allArrays = [
+            ...createArray(comment),
+            ...createArray2(comment),
+            ...createArray3(comment),
+            ...createArray4(comment)
+        ];
+        
+        // Check the combined array once
+        const result = checkArray(allArrays);
     
         serverComments.push({
             nama,
             comment,
-            arrayComment : result
+            arrayComment: result
         });
     
         fs.writeFile(urlServer, JSON.stringify(serverComments), function writeJSON(err) {
             if (err) return console.log(err);
             console.log("Add Comment Success");
         });
-        
     }
 
     tambahKomentar(user, pernyataan);
@@ -164,7 +198,10 @@ function upComments(server, user, pernyataan){
 let kode = 1234;
 
 function createServer(nama, user){
-    fs.mkdir(`./Server/${nama}`, { recursive: true }, (err) => {
+    // if(fs.existsSync(`./Server/${nama}`)){
+    //     throw 'Server already'
+    // }
+    fs.mkdirSync(`./Server/${nama}`, { recursive: true }, (err) => {
         if (err) throw err;
       });
 
@@ -177,12 +214,12 @@ function createServer(nama, user){
 
     const comments = [];
 
-    fs.writeFile(`./Server/${nama}/info.json`, JSON.stringify(info), (err) => {
+    fs.writeFileSync(`./Server/${nama}/info.json`, JSON.stringify(info), (err) => {
         if(err) throw err;
         console.log('Server Create');
     });
 
-    fs.writeFile(`./Server/${nama}/comments.json`, JSON.stringify(comments), (err) => {
+    fs.writeFileSync(`./Server/${nama}/comments.json`, JSON.stringify(comments), (err) => {
         if(err) throw err;
     });
 
@@ -434,19 +471,57 @@ app.post('/joinServer', (req, res) => {
 })
 
 app.post('/server/:nama', async (req, res) => {
-    const infoServer = require(`./Server/${req.params.nama}/info.json`);
-    const serverComments = require(`./Server/${req.params.nama}/comments.json`);
-    const user = jwt.decode(req.cookies.access_token);
+    try {
+        const infoServer = require(`./Server/${req.params.nama}/info.json`);
+        const serverComments = require(`./Server/${req.params.nama}/comments.json`);
+        const user = jwt.decode(req.cookies.access_token);
 
-    penyakit = await Penyakit.find({})
+        // Validate input
+        if (!req.body.pernyataan || typeof req.body.pernyataan !== 'string') {
+            if (req.xhr || req.headers.accept && req.headers.accept.includes('application/json')) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: 'Invalid message format' 
+                });
+            }
+            return res.status(400).send('Invalid message format');
+        }
 
-    upComments(req.params.nama, user.data.name, req.body.pernyataan);
+        // Process the message
+        upComments(req.params.nama, user.data.name, req.body.pernyataan);
 
-    setTimeout(() => {
-        res.render('index',{layout: false, serverComments, infoServer, user: {nama: user.data.name, email: user.data.email}});
-    }, 500);
+        // Get updated comments
+        const updatedComments = require(`./Server/${req.params.nama}/comments.json`);
 
-})
+        // Return appropriate response
+        if (req.xhr || req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.json({ 
+                success: true,
+                messages: updatedComments
+            });
+        }
+
+        // For regular form submissions, render the page
+        res.render('index', {
+            layout: false, 
+            serverComments: updatedComments, 
+            infoServer, 
+            user: {
+                nama: user.data.name, 
+                email: user.data.email
+            }
+        });
+    } catch (error) {
+        console.error('Error in message submission:', error);
+        if (req.xhr || req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.status(500).json({ 
+                success: false, 
+                error: 'Failed to process message' 
+            });
+        }
+        res.status(500).send('Error processing message');
+    }
+});
 
 // End of Auth
 
@@ -612,15 +687,25 @@ app.get('/test',(req,res) => {
 // })
 
 app.get('/penyakit/:nama', async (req,res) => {
-    const token = req.cookies.access_token
-    if(!token){
-        return res.redirect('/login')
+    try {
+        // Find the disease in Penyakit.json
+        const penyakit = require('./Penyakit.json').find(p => 
+            p.nama.toLowerCase() === req.params.nama.toLowerCase()
+        );
+
+        if (!penyakit) {
+            return res.status(404).send('Penyakit tidak ditemukan');
+        }
+
+        res.render('detailpenyakit', {
+            layout: false,
+            penyakit: penyakit
+        });
+    } catch (error) {
+        console.error('Error in penyakit detail:', error);
+        res.status(500).send('Error loading penyakit details');
     }
-
-    const penyakit = await Penyakit.findOne({nama: req.params.nama})
-
-    res.render('detailpenyakit',{layout: false, penyakit})
-})
+});
 
 app.get('/server/:nama', (req,res) => {
     const token = req.cookies.access_token
@@ -633,6 +718,22 @@ app.get('/server/:nama', (req,res) => {
     const user = jwt.decode(req.cookies.access_token)
 
     res.render('index', {layout: false, infoServer, serverComments, user: {nama: user.data.name, email: user.data.email}})
+});
+
+// Modify the messages API endpoint to handle errors better
+app.get('/api/messages/:serverName', (req, res) => {
+    try {
+        const token = req.cookies.access_token;
+        if(!token) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        const serverComments = require(`./Server/${req.params.serverName}/comments.json`);
+        res.json({ messages: serverComments });
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        res.status(500).json({ error: 'Failed to fetch messages' });
+    }
 });
 
 app.get('/server', (req, res) => {
