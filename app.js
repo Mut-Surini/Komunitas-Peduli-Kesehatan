@@ -555,10 +555,7 @@ app.get('/', (req, res) => {
     if(!token){
         return res.redirect('/login')
     }
-    res.render('home', {
-        title: 'Home',
-        active: 'home',
-    })
+    return res.redirect('/server')
 })
 app.get('/register',(req,res,next) => {
     if(res.locals.login){
@@ -611,14 +608,6 @@ app.get('/forgotpassword',(req,res,next) => {
         return next()
     }
     res.render('forgot',{title: 'Blog - Forgot Password', layout: 'main-login-regis',msg: req.flash('msg')})
-})
-app.get('/dashboard',(req,res,next) => {
-    jwt.verify(req.cookies.access_token,'secret',async(err,decode) => {
-        if(err){
-            return next()
-        }
-        res.render('dashboard',{title: 'Dashboard', active: '',layout: 'main-dashboard', userData: decode.data})  
-    })
 })
 app.get('/home',(req,res) => {
     res.redirect('/')
