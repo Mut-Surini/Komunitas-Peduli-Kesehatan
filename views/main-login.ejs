@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrussCure | Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#ec4899',
+                        'primary-light': '#f9a8d4',
+                        'primary-dark': '#be185d'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="shortcut icon" href="/image/LogoH.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="font-inter bg-gray-50 min-h-screen">
     <%- body %>
 </body>
 </html>

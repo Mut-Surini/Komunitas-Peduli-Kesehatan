@@ -1,105 +1,323 @@
-<div class="container-signup">
-    <div class="sign">
-        <form method="post">
-            <img src="/image/medical-team.png" alt="">
-            <h1>Cruss Cure</h1>
-            <h2>Sign Up To Join</h2>
-            <div class="input-name">
-                <input type="text" name="username" placeholder="Nama Lengkap" value="<% if(typeof data != 'undefined'){ %><%= data.username %><% } %>" required>
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'username') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: -10px; margin-left: 0;">
-                            <p><%= errors.find(element => element.param == 'username').msg %></p>
-                        </div>
-                    <% } %> 
-                <% } %> 
+<div class="relative z-10">
+    <div class="mx-auto">
+        <!-- Main Card -->
+        <div class="bg-white overflow-hidden animate-fade-in">
+            <!-- Header Section -->
+            <div class="bg-primary px-8 sm:px-12 py-8 sm:py-10 text-center w-full">
+                <div class="animate-slide-up">
+                    <div class="relative inline-block mb-4">
+                        <img src="/image/medical-team.png" alt="Medical Team" class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full shadow-lg border-4 border-white/30">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-full"></div>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">Cruss Cure</h1>
+                    <p class="text-white/90 text-lg sm:text-xl font-medium">Bergabung dengan Komunitas Kesehatan</p>
+                </div>
             </div>
-            <div class="input-email">
-                <input type="email" id="email" name="email" placeholder="E-mail" required value="<% if(typeof data != 'undefined'){ %><%= data.email %><% } %>"><label for="email">
-                    <% if(typeof errors != 'undefined'){ %> 
-                        <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
-                            <div class="error" style="margin-top: -10px; margin-left: 0;">
-                                <p><%= errors.find(element => element.param == 'email').msg %></p>
+
+            <!-- Form Section -->
+            <div class="px-6 sm:px-28 lg:px-32 py-8 sm:py-10">
+                <form method="post" class="space-y-8">
+                    <!-- Personal Information Section -->
+                    <div class="animate-slide-up">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm font-bold">1</span>
                             </div>
+                            Informasi Pribadi
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Full Name -->
+                            <div class="lg:col-span-2">
+                                <label for="username" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
+                                <input 
+                                    type="text" 
+                                    id="username"
+                                    name="username" 
+                                    placeholder="Masukkan nama lengkap Anda" 
+                                    value="<% if(typeof data != 'undefined'){ %><%= data.username %><% } %>" 
+                                    required
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                >
+                                <% if(typeof errors != 'undefined'){ %> 
+                                    <% if(typeof errors.find(element => element.param == 'username') != 'undefined'){ %> 
+                                        <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+                                            <p class="text-sm text-red-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <%= errors.find(element => element.param == 'username').msg %>
+                                            </p>
+                                        </div>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="nama@email.com" 
+                                    required 
+                                    value="<% if(typeof data != 'undefined'){ %><%= data.email %><% } %>"
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                >
+                                <% if(typeof errors != 'undefined'){ %> 
+                                    <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
+                                        <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+                                            <p class="text-sm text-red-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <%= errors.find(element => element.param == 'email').msg %>
+                                            </p>
+                                        </div>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <!-- Role -->
+                            <div>
+                                <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">Peran Profesi</label>
+                                <select 
+                                    name="role" 
+                                    id="role"
+                                    required
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800"
+                                >
+                                    <option value="" hidden>Pilih peran Anda</option>
+                                    <option value="Nurse">🩺 Perawat</option>
+                                    <option value="Doctor">👨‍⚕️ Dokter</option>
+                                    <option value="Scientist">🔬 Ilmuwan</option>
+                                    <option value="None">👤 Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="animate-slide-up">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm font-bold">2</span>
+                            </div>
+                            Keamanan Akun
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password"
+                                    name="password" 
+                                    placeholder="Buat password yang kuat" 
+                                    required 
+                                    value="<% if(typeof data != 'undefined'){ %><%= data.password %><% } %>"
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                >
+                            </div>
+                            <div>
+                                <label for="password2" class="block text-sm font-semibold text-gray-700 mb-2">Konfirmasi Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password2"
+                                    name="password2" 
+                                    placeholder="Ulangi password Anda" 
+                                    required 
+                                    value="<% if(typeof data != 'undefined'){ %><%= data.password2 %><% } %>"
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                >
+                            </div>
+                        </div>
+                        <% if(typeof errors != 'undefined'){ %> 
+                            <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
+                                <div class="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                                    <p class="text-sm text-red-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <%= errors.find(element => element.param == 'password').msg %>
+                                    </p>
+                                </div>
+                            <% } %> 
                         <% } %> 
-                    <% } %> 
-            </div>
-            <div class="input-password">
-                <input type="password" name="password" placeholder="Password" required value="<% if(typeof data != 'undefined'){ %><%= data.password %><% } %>">
-            </div>
-            <div class="input-repassword">
-                <input type="password" name="password2" placeholder="Repeat Password" required value="<% if(typeof data != 'undefined'){ %><%= data.password2 %><% } %>"> 
-            </div>
-            <% if(typeof errors != 'undefined'){ %> 
-                <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
-                        <p style="color: red; text-align: left; margin-top: 0; margin-left: 30px;"><%= errors.find(element => element.param == 'password').msg %></p>
-                <% } %> 
-            <% } %> 
-            <div class="role">
-                <select name="role" required>
-                    <option value="Role" hidden>Role</option>
-                    <option value="Nurse">Nurse</option>
-                    <option value="Doctor">Doctor</option>
-                    <option value="Scientist">Scientist</option>
-                    <option value="None">None</option>
-                </select>
-            </div>
-            <div class="height">
-                <input type="number" id="height" name="tinggi" placeholder="Tinggi" required value="<% if(typeof data != 'undefined'){ %><%= data.tinggi %><% } %>">
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'tinggi') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: -10px; margin-left: 0;">
-                            <p><%= errors.find(element => element.param == 'tinggi').msg %></p>
+                    </div>
+
+                    <!-- Health Information Section -->
+                    <div class="animate-slide-up">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm font-bold">3</span>
+                            </div>
+                            Informasi Kesehatan
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Height -->
+                            <div>
+                                <label for="height" class="block text-sm font-semibold text-gray-700 mb-2">Tinggi Badan</label>
+                                <div class="relative">
+                                    <input 
+                                        type="number" 
+                                        id="height" 
+                                        name="tinggi" 
+                                        placeholder="170" 
+                                        required 
+                                        value="<% if(typeof data != 'undefined'){ %><%= data.tinggi %><% } %>"
+                                        class="w-full px-4 py-4 pr-12 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                    >
+                                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">cm</span>
+                                </div>
+                                <% if(typeof errors != 'undefined'){ %> 
+                                    <% if(typeof errors.find(element => element.param == 'tinggi') != 'undefined'){ %> 
+                                        <p class="mt-2 text-sm text-red-600">
+                                            <%= errors.find(element => element.param == 'tinggi').msg %>
+                                        </p>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <!-- Weight -->
+                            <div>
+                                <label for="weight" class="block text-sm font-semibold text-gray-700 mb-2">Berat Badan</label>
+                                <div class="relative">
+                                    <input 
+                                        type="number" 
+                                        id="weight" 
+                                        name="berat" 
+                                        placeholder="70" 
+                                        required 
+                                        value="<% if(typeof data != 'undefined'){ %><%= data.berat %><% } %>"
+                                        class="w-full px-4 py-4 pr-12 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                    >
+                                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">kg</span>
+                                </div>
+                                <% if(typeof errors != 'undefined'){ %> 
+                                    <% if(typeof errors.find(element => element.param == 'berat') != 'undefined'){ %> 
+                                        <p class="mt-2 text-sm text-red-600">
+                                            <%= errors.find(element => element.param == 'berat').msg %>
+                                        </p>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <!-- Age -->
+                            <div>
+                                <label for="age" class="block text-sm font-semibold text-gray-700 mb-2">Usia</label>
+                                <div class="relative">
+                                    <input 
+                                        type="number" 
+                                        id="age" 
+                                        name="umur" 
+                                        placeholder="25" 
+                                        required 
+                                        value="<% if(typeof data != 'undefined'){ %><%= data.umur %><% } %>"
+                                        class="w-full px-4 py-4 pr-16 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400"
+                                    >
+                                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">tahun</span>
+                                </div>
+                                <% if(typeof errors != 'undefined'){ %> 
+                                    <% if(typeof errors.find(element => element.param == 'umur') != 'undefined'){ %> 
+                                        <p class="mt-2 text-sm text-red-600">
+                                            <%= errors.find(element => element.param == 'umur').msg %>
+                                        </p>
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+
+                            <!-- Blood Type -->
+                            <div>
+                                <label for="golDar" class="block text-sm font-semibold text-gray-700 mb-2">Golongan Darah</label>
+                                <select 
+                                    name="golDar" 
+                                    id="golDar"
+                                    required
+                                    class="w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800"
+                                >
+                                    <option value="" hidden>Pilih</option>
+                                    <option value="A">🩸 A</option>
+                                    <option value="B">🩸 B</option>
+                                    <option value="AB">🩸 AB</option>
+                                    <option value="O">🩸 O</option>
+                                    <option value="A+">🩸 A+</option>
+                                    <option value="A-">🩸 A-</option>
+                                    <option value="B+">🩸 B+</option>
+                                    <option value="B-">🩸 B-</option>
+                                    <option value="AB+">🩸 AB+</option>
+                                    <option value="AB-">🩸 AB-</option>
+                                    <option value="O+">🩸 O+</option>
+                                    <option value="O-">🩸 O-</option>
+                                </select>
+                            </div>
                         </div>
-                    <% } %> 
-                <% } %> 
-            </div>
-            <div class="weight">
-                <input type="number" id="weight" name="berat" placeholder="Berat" required value="<% if(typeof data != 'undefined'){ %><%= data.berat %><% } %>">
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'berat') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: -10px; margin-left: 0;">
-                            <p><%= errors.find(element => element.param == 'berat').msg %></p>
+
+                        <!-- Gender -->
+                        <div class="mt-6">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Jenis Kelamin</label>
+                            <div class="flex space-x-8">
+                                <label for="pria" class="flex items-center cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input 
+                                            type="radio" 
+                                            name="gender" 
+                                            id="pria" 
+                                            value="laki"
+                                            class="w-5 h-5 text-primary border-2 border-gray-300 focus:ring-primary focus:ring-2 group-hover:border-primary transition-colors"
+                                        >
+                                    </div>
+                                    <span class="ml-3 text-gray-700 group-hover:text-primary transition-colors">👨 Pria</span>
+                                </label>
+                                <label for="wanita" class="flex items-center cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input 
+                                            type="radio" 
+                                            name="gender" 
+                                            id="wanita" 
+                                            value="perempuan"
+                                            class="w-5 h-5 text-primary border-2 border-gray-300 focus:ring-primary focus:ring-2 group-hover:border-primary transition-colors"
+                                        >
+                                    </div>
+                                    <span class="ml-3 text-gray-700 group-hover:text-primary transition-colors">👩 Wanita</span>
+                                </label>
+                            </div>
                         </div>
-                    <% } %> 
-                <% } %> 
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
+                        <p class="text-sm text-gray-600 text-center leading-relaxed">
+                            Dengan mendaftar, Anda menyetujui 
+                            <span class="text-primary hover:text-primary-dark hover:cursor-pointer font-semibold transition-colors underline decoration-2 underline-offset-2">Syarat & Ketentuan</span>, 
+                            <span class="text-primary hover:text-primary-dark hover:cursor-pointer font-semibold transition-colors underline decoration-2 underline-offset-2">Kebijakan Privasi</span> dan 
+                            <span class="text-primary hover:text-primary-dark hover:cursor-pointer font-semibold transition-colors underline decoration-2 underline-offset-2">Kebijakan Cookie</span> kami.
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button 
+                            type="submit"
+                            class="w-full bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-purple-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 text-lg"
+                        >
+                            Bergabung Sekarang
+                        </button>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="text-center pt-6 border-t border-gray-100">
+                        <p class="text-gray-600">
+                            Sudah memiliki akun? 
+                            <a href="/login" class="text-primary hover:text-primary-dark font-semibold transition-colors hover:underline decoration-2 underline-offset-2">
+                                Masuk di sini →
+                            </a>
+                        </p>
+                    </div>
+                </form>
             </div>
-            <div class="age">
-                <input type="number" id="age" name="umur" placeholder="Umur" required value="<% if(typeof data != 'undefined'){ %><%= data.umur %><% } %>">
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'umur') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: -10px; margin-left: 0;">
-                            <p><%= errors.find(element => element.param == 'umur').msg %></p>
-                        </div>
-                    <% } %> 
-                <% } %> 
-            </div>
-            <div class="goldar">
-                <select name="golDar" required>
-                    <option value="Golongan Darah" hidden>Golongan Darah</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="AB">AB</option>
-                    <option value="O">O</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                </select>
-            </div>
-            <div class="gender">
-                <label for="pria"><input type="radio" name="gender" id="pria" value="laki">Pria</label>
-                <label for="wanita"><input type="radio" name="gender" id="wanita" value="perempuan">Wanita</label>
-            </div>
-            <p>By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .</p>
-            <div class="submit">
-                <button type="submit">Submit</button>
-            </div>
-            <p>Already have account? <a href="/login">Login</a></p>
-        </form>
+        </div>
     </div>
 </div>

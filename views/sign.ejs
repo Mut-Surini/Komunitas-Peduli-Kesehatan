@@ -1,39 +1,93 @@
-<div class="container">
-    <div class="content">
-        <h1>KOMUNITAS PEDULI KESEHATAN</h1>
-        <img src="image/cover-min.jpg" alt="">
+<div class="flex flex-col lg:flex-row min-h-screen">
+    <!-- Left Content Section -->
+    <div class="w-full lg:w-1/2 bg-white flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 py-8 lg:py-0">
+        <div class="">
+            <h1 class="text-2xl mx-auto text-wrap max-w-md sm:text-3xl lg:text-3xl font-semibold text-gray-900 leading-tight text-center">
+                KOMUNITAS PEDULI KESEHATAN
+            </h1>
+            <div class="mb-4 lg:mb-6">
+                <img src="image/cover-min.jpg" alt="Health Community" class="w-full">
+            </div>
+            <p class="text-gray-600 text-base sm:text-lg text-center">
+                Bergabunglah dengan komunitas yang peduli kesehatan Anda.
+            </p>
+        </div>
     </div>
-    <div class="form">
-        <form method="post">
-            <div class="image">
-                <img src="/image/LogoH.png" alt="">
-            </div>
-            <div class="input-email">
-                <input type="email" name="email" placeholder="Email" required>
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: 10px;">
-                            <p><%= errors.find(element => element.param == 'email').msg %></p>
-                        </div>
+    
+    <!-- Right Form Section -->
+    <div class="w-full lg:w-1/2 bg-rose-300 flex items-center justify-center px-6 sm:px-8 md:px-12 lg:px-8 py-8 lg:py-0">
+        <div class="w-full max-w-md">
+            <form method="post" class="space-y-4 sm:space-y-6">
+                <!-- Logo & Header -->
+                <div class="text-center mb-6 sm:mb-8">
+                    <img src="/image/LogoH.png" alt="Logo" class="w-12 h-12 sm:w-28 sm:h-28 mx-auto mb-1">
+                    <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Masuk ke Akun</h2>
+                    <p class="text-gray-800 mt-1 text-sm sm:text-base">Selamat datang kembali</p>
+                </div>
+                
+                <!-- Email Input -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-900 mb-2">
+                        Email
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email"
+                        name="email" 
+                        placeholder="nama@email.com" 
+                        required
+                        class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors"
+                    >
+                    <% if(typeof errors != 'undefined'){ %> 
+                        <% if(typeof errors.find(element => element.param == 'email') != 'undefined'){ %> 
+                            <p class="mt-2 text-sm text-red-600">
+                                <%= errors.find(element => element.param == 'email').msg %>
+                            </p>
+                        <% } %> 
                     <% } %> 
-                <% } %> 
-            </div>
-            <div class="input-password">
-                <input type="password" name="password" placeholder="Password" required>
-                <% if(typeof errors != 'undefined'){ %> 
-                    <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
-                        <div class="error" style="margin-top: 10px;">
-                            <p><%= errors.find(element => element.param == 'password').msg %></p>
-                        </div>
+                </div>
+                
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-900 mb-2">
+                        Password
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        placeholder="Masukkan password" 
+                        required
+                        class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors"
+                    >
+                    <% if(typeof errors != 'undefined'){ %> 
+                        <% if(typeof errors.find(element => element.param == 'password') != 'undefined'){ %> 
+                            <p class="mt-2 text-sm text-red-600">
+                                <%= errors.find(element => element.param == 'password').msg %>
+                            </p>
+                        <% } %> 
                     <% } %> 
-                <% } %> 
-            </div>
-            <div class="submit">
-                <button class="icon" type="submit" name="Sign in">Sign In</button>
-            </div>
-            <div class="text">
-                <p>Don't have an account? <a href="/register">Create account</a></p>
-            </div>
-        </form>
+                </div>
+                
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    name="Sign in"
+                    class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 sm:py-3 px-4 text-sm sm:text-base rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                >
+                    Masuk
+                </button>
+
+                <!-- Sign up link -->
+                <div class="text-center pt-3 sm:pt-4">
+                    <p class="text-gray-800 text-sm sm:text-base">
+                        Belum punya akun? 
+                        <a href="/register" class="text-primary hover:text-primary-dark font-medium transition-colors">
+                            Daftar di sini
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

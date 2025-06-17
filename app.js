@@ -21,9 +21,6 @@ const transporter = nodemailer.createTransport({
 });
 // End of Mailer transport
 
-
-
-
 // Flash Message npm
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
