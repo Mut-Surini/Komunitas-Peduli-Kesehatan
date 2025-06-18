@@ -1,69 +1,213 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <title>CrussCure | Server</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../dist/output.css" />
     <meta charset="utf-8" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#ec4899',
+                        'primary-light': '#f472b6',
+                        'primary-dark': '#be185d'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="shortcut icon" href="image/LogoH.png" type="image/x-icon">
-  </head>
+</head>
 
-  <body>
-    <section>
-      <header class="text-white bg-gradient-to-b from-pink-400 to-pink-500 p-4">
-          <nav class="flex justify-between w-[92%] mx-auto text-2xl">
-              <div class="  md:min-h-fit min-h-[60vh] left-0 top-[9%] md:w-auto w-full flex item-center px-5 my-auto font-lato">
-                  <ul class="flex md:flex-row flex-col md:item-center md:gap-[4vw] gap-[2vh]">
-                      <li>
-                          <a class="text-white font-bold text-3xl" href="/server">Server</a>
-                      </li>
-                      <li>
-                          <a class="text-white text-base hover:font-bold hover:text-xl" href="/server/global">Global</a>
-                      </li>
-                      <li>
-                          <a class="text-white text-base hover:font-bold hover:text-xl" href="/acc"> Account</a>
-                      </li>
-                  </ul>
-              </div>
-              <div>
-                  <img class="w-20  mr-36 "src="/image/LogoH.png">
-              </div>
-              <div class="my-auto">
-                  <button class="bg-pink-500 px-8 py-2 text-center border-white border-1 rounded-full hover:bg-pink-600 font-lato font-bold"><a href="/logout">Log out</a></button>
-              </div>
-          </nav>
-      </header>
-  </section>
-    <section>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ec4899" fill-opacity="1" d="M0,160L40,133.3C80,107,160,53,240,48C320,43,400,85,480,101.3C560,117,640,107,720,90.7C800,75,880,53,960,64C1040,75,1120,117,1200,128C1280,139,1360,117,1400,106.7L1440,96L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
-      <div class="item-center -mt-64">
-        <h1 class="text-pink-500 font-bold text-center text-4xl mt-20"> Pilih Server !</h1>
-        <h2 class="text-gray-500 text-xl text-center">- Bergabung dengan komunitas lainnya</h2>
-      </div>
-      <form method="post" action="/createServer" autocomplete="off">
-        <div class="text-center bg-pink-500 mx-80 rounded-3xl mt-8 p-7">
-          <button class="mt-5 text-center item-center bg-pink-600 text-2xl hover:bg-pink-400 text-white w-1/2 h-20 rounded-lg mx-auto" type="submit">Create Server</button> <br />
-          <input type="text" class="text-center bg-white text-pink-500 mb-5 font-bold p-2 rounded-b-2xl w-1/3 mx-auto text-base h-10 hover:border-red-500" placeholder="Nama Server!" name="nameServer" />
-      </form>
-      <form method="post" action="/joinServer" autocomplete="off">
-          <br />
-          <button class="mt-5 text-center item-center bg-pink-600 text-2xl hover:bg-pink-400 text-white w-1/2 h-20 rounded-lg mx-auto">Join Server</button> <br />
-          <input type="text" class="text-center bg-white text-pink-500 mb-10 font-bold p-2 rounded-b-2xl w-1/3 mx-auto text-base h-10 hover:border-red-500" type="submit" placeholder="Masukkan nama server!" name="nameServer"/>
+<body class="font-inter bg-gray-50">
+    <!-- Header Section with Wave -->
+    <section class="relative">
+        <header class="bg-primary text-white relative overflow-hidden">
+            <nav class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <!-- Left Navigation -->
+                    <div class="flex items-center space-x-8">
+                        <div class="hidden md:flex items-center space-x-8">
+                            <a href="/server" class="text-white font-bold text-2xl lg:text-3xl hover:text-white/80 transition-colors">
+                                Server
+                            </a>
+                            <a href="/server/global" class="text-white/80 hover:text-white text-lg font-medium transition-colors">
+                                Global
+                            </a>
+                            <a href="/acc" class="text-white/80 hover:text-white text-lg font-medium transition-colors">
+                                Profile
+                            </a>
+                        </div>
+                        
+                        <!-- Mobile Menu Button -->
+                        <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Center Logo -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2">
+                        <div class="bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
+                            <img src="/image/LogoH.png" alt="CrussCure Logo" class="w-12 h-12 sm:w-16 sm:h-16">
+                        </div>
+                    </div>
+
+                    <!-- Right Logout -->
+                    <div>
+                        <a href="/logout" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-all duration-300 hover:scale-105 shadow-lg">
+                            Log out
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation Menu -->
+                <div id="mobileMenu" class="hidden md:hidden mt-6 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                    <div class="flex flex-col space-y-4">
+                        <a href="/server" class="text-white font-bold text-xl">Server</a>
+                        <a href="/server/global" class="text-white/80 hover:text-white transition-colors">Global</a>
+                        <a href="/acc" class="text-white/80 hover:text-white transition-colors">Account</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Top Wave -->
+        <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="w-full h-auto">
+                <path fill="#ec4899" fill-opacity="1" d="M0,160L40,133.3C80,107,160,53,240,48C320,43,400,85,480,101.3C560,117,640,107,720,90.7C800,75,880,53,960,64C1040,75,1120,117,1200,128C1280,139,1360,117,1400,106.7L1440,96L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+            </svg>
         </div>
-      </form>
-      
     </section>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#ec4899" fill-opacity="1" d="M0,0L60,37.3C120,75,240,149,360,165.3C480,181,600,139,720,117.3C840,96,960,96,1080,80C1200,64,1320,32,1380,16L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-    </svg>
-  </body>
+
+    <!-- Main Content -->
+    <section class="relative -mt-32 sm:-mt-32 lg:-mt-40 lg:mb-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Title Section -->
+            <div class="text-center mb-12 relative z-10">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
+                    Pilih Server!
+                </h1>
+                <p class="text-gray-600 text-lg sm:text-xl">
+                    Bergabung dengan komunitas lainnya
+                </p>
+            </div>
+
+            <!-- Server Actions Container - Now Flex -->
+            <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative z-10">
+                <div class="flex flex-col lg:flex-row">
+                    <!-- Create Server Section -->
+                    <div class="flex-1 p-8 sm:p-12">
+                        <div class="text-center mb-8">
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-4">
+                                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                                Buat Server Baru
+                            </h2>
+                            <p class="text-gray-600">Mulai komunitas kesehatan Anda sendiri</p>
+                        </div>
+
+                        <form method="post" action="/createServer" autocomplete="off" class="max-w-md mx-auto">
+                            <div class="space-y-4">
+                                <div class="relative">
+                                    <input 
+                                        type="text" 
+                                        name="nameServer" 
+                                        placeholder="Masukkan nama server..." 
+                                        required
+                                        class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400 text-center font-medium"
+                                    />
+                                </div>
+                                <button 
+                                    type="submit"
+                                    class="w-full bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+                                >
+                                    Buat Server
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Divider for Mobile -->
+                    <div class="lg:hidden relative">
+                        <div class="absolute inset-0 flex items-center px-8 sm:px-12">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="bg-white px-6 py-2 text-gray-500 font-medium">atau</span>
+                        </div>
+                    </div>
+
+                    <!-- Vertical Divider for Desktop -->
+                    <div class="hidden lg:flex items-center justify-center w-16">
+                        <div class="flex flex-col items-center">
+                            <div class="w-px h-40 bg-gray-200"></div>
+                            <span class="bg-white px-3 py-1 text-gray-500 font-medium text-sm">atau</span>
+                            <div class="w-px h-40 bg-gray-200"></div>
+                        </div>
+                    </div>
+
+                    <!-- Join Server Section -->
+                    <div class="flex-1 p-8 sm:p-12">
+                        <div class="text-center mb-8">
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-2xl mb-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                                Bergabung dengan Server
+                            </h2>
+                            <p class="text-gray-600">Terhubung dengan komunitas yang sudah ada</p>
+                        </div>
+
+                        <form method="post" action="/joinServer" autocomplete="off" class="max-w-md mx-auto">
+                            <div class="space-y-4">
+                                <div class="relative">
+                                    <input 
+                                        type="text" 
+                                        name="nameServer" 
+                                        placeholder="Masukkan nama server..." 
+                                        required
+                                        class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400 text-center font-medium"
+                                    />
+                                </div>
+                                <button 
+                                    type="submit"
+                                    class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+                                >
+                                    Gabung Server
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Bottom Info -->
+                <div class="bg-gray-50 px-8 sm:px-12 py-6 text-center border-t border-gray-100">
+                    <p class="text-sm text-gray-600">
+                        💡 <strong>Tips:</strong> Pastikan nama server yang Anda masukkan sudah benar dan tersedia
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
 </html>
