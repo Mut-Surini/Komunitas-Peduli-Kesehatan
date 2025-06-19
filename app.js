@@ -21,6 +21,9 @@ const transporter = nodemailer.createTransport({
 });
 // End of Mailer transport
 
+
+
+
 // Flash Message npm
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -195,9 +198,11 @@ function upComments(server, user, pernyataan){
 let kode = 1234;
 
 function createServer(nama, user){
-    // if(fs.existsSync(`./Server/${nama}`)){
-    //     throw 'Server already'
-    // }
+    // Check if server already exists
+    if(fs.existsSync(`./Server/${nama}`)){
+        return false; // Server already exists
+    }
+    
     fs.mkdirSync(`./Server/${nama}`, { recursive: true }, (err) => {
         if (err) throw err;
       });
@@ -221,6 +226,7 @@ function createServer(nama, user){
     });
 
     kode += 1;
+    return true; // Server created successfully
 }
 
 function deleteServer(nama){
@@ -456,15 +462,37 @@ app.post('/auth/reset/:token',body('password').isLength({min: 1}).withMessage('T
 })
 
 app.post('/createServer', (req, res) => {
-
-    createServer(req.body.nameServer, "User");
-
-    res.redirect(`/server/${req.body.nameServer}`);
+    const serverName = req.body.nameServer;
+    
+    // Validate server name
+    if (!serverName || serverName.trim() === '') {
+        return res.redirect('/server?error=empty');
+    }
+    
+    // Try to create server
+    const success = createServer(serverName, "User");
+    
+    if (success) {
+        res.redirect(`/server/${serverName}`);
+    } else {
+        res.redirect('/server?error=exists&name=' + encodeURIComponent(serverName));
+    }
 })
 
 app.post('/joinServer', (req, res) => {
-
-    res.redirect(`/server/${req.body.nameServer}`);
+    const serverName = req.body.nameServer;
+    
+    // Validate server name
+    if (!serverName || serverName.trim() === '') {
+        return res.redirect('/server?error=empty');
+    }
+    
+    // Check if server exists
+    if (fs.existsSync(`./Server/${serverName}`)) {
+        res.redirect(`/server/${serverName}`);
+    } else {
+        res.redirect('/server?error=notfound&name=' + encodeURIComponent(serverName));
+    }
 })
 
 app.post('/server/:nama', async (req, res) => {
@@ -527,10 +555,7 @@ app.get('/', (req, res) => {
     if(!token){
         return res.redirect('/login')
     }
-    res.render('home', {
-        title: 'Home',
-        active: 'home',
-    })
+    return res.redirect('/server')
 })
 app.get('/register',(req,res,next) => {
     if(res.locals.login){
@@ -583,14 +608,6 @@ app.get('/forgotpassword',(req,res,next) => {
         return next()
     }
     res.render('forgot',{title: 'Blog - Forgot Password', layout: 'main-login-regis',msg: req.flash('msg')})
-})
-app.get('/dashboard',(req,res,next) => {
-    jwt.verify(req.cookies.access_token,'secret',async(err,decode) => {
-        if(err){
-            return next()
-        }
-        res.render('dashboard',{title: 'Dashboard', active: '',layout: 'main-dashboard', userData: decode.data})  
-    })
 })
 app.get('/home',(req,res) => {
     res.redirect('/')
@@ -739,7 +756,15 @@ app.get('/server', (req, res) => {
         return res.redirect('/login')
     }
 
-    res.render('server',{layout: false});
+    // Get error parameters
+    const error = req.query.error;
+    const serverName = req.query.name;
+    
+    res.render('server', {
+        layout: false,
+        error: error,
+        serverName: serverName
+    });
 })
 
 app.get('/acc', async (req, res) => {

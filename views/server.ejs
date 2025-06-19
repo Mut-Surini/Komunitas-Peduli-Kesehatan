@@ -29,25 +29,25 @@
 <body class="font-inter bg-gray-50">
     <!-- Header Section with Wave -->
     <section class="relative">
-        <header class="bg-primary text-white relative overflow-hidden">
-            <nav class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <header class="relative overflow-hidden text-white bg-primary">
+            <nav class="relative z-10 px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between">
                     <!-- Left Navigation -->
                     <div class="flex items-center space-x-8">
-                        <div class="hidden md:flex items-center space-x-8">
-                            <a href="/server" class="text-white font-bold text-2xl lg:text-3xl hover:text-white/80 transition-colors">
+                        <div class="items-center hidden space-x-8 md:flex">
+                            <a href="/server" class="text-2xl font-bold text-white transition-colors lg:text-3xl hover:text-white/80">
                                 Server
                             </a>
-                            <a href="/server/global" class="text-white/80 hover:text-white text-lg font-medium transition-colors">
+                            <a href="/server/global" class="text-lg font-medium transition-colors text-white/80 hover:text-white">
                                 Global
                             </a>
-                            <a href="/acc" class="text-white/80 hover:text-white text-lg font-medium transition-colors">
+                            <a href="/acc" class="text-lg font-medium transition-colors text-white/80 hover:text-white">
                                 Profile
                             </a>
                         </div>
                         
                         <!-- Mobile Menu Button -->
-                        <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                        <button class="p-2 text-white md:hidden" onclick="toggleMobileMenu()">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
@@ -55,26 +55,26 @@
                     </div>
 
                     <!-- Center Logo -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2">
-                        <div class="bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
+                    <div class="absolute transform -translate-x-1/2 left-1/2">
+                        <div class="shadow-lg bg-white/20 backdrop-blur-sm rounded-2xl">
                             <img src="/image/LogoH.png" alt="CrussCure Logo" class="w-12 h-12 sm:w-16 sm:h-16">
                         </div>
                     </div>
 
                     <!-- Right Logout -->
                     <div>
-                        <a href="/logout" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <a href="/logout" class="px-6 py-3 font-semibold text-white transition-all duration-300 border shadow-lg bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-xl border-white/20 hover:scale-105">
                             Log out
                         </a>
                     </div>
                 </div>
 
                 <!-- Mobile Navigation Menu -->
-                <div id="mobileMenu" class="hidden md:hidden mt-6 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div id="mobileMenu" class="hidden p-4 mt-6 md:hidden bg-white/10 backdrop-blur-sm rounded-xl">
                     <div class="flex flex-col space-y-4">
-                        <a href="/server" class="text-white font-bold text-xl">Server</a>
-                        <a href="/server/global" class="text-white/80 hover:text-white transition-colors">Global</a>
-                        <a href="/acc" class="text-white/80 hover:text-white transition-colors">Account</a>
+                        <a href="/server" class="text-xl font-bold text-white">Server</a>
+                        <a href="/server/global" class="transition-colors text-white/80 hover:text-white">Global</a>
+                        <a href="/acc" class="transition-colors text-white/80 hover:text-white">Account</a>
                     </div>
                 </div>
             </nav>
@@ -89,30 +89,30 @@
     </section>
 
     <!-- Main Content -->
-    <section class="relative -mt-32 sm:-mt-32 lg:-mt-40 lg:mb-10 px-4 sm:px-6 lg:px-8">
+    <section class="relative px-4 -mt-32 sm:-mt-32 lg:-mt-40 lg:mb-10 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
             <!-- Title Section -->
-            <div class="text-center mb-12 relative z-10">
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
+            <div class="relative z-10 mb-12 text-center">
+                <h1 class="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl text-primary">
                     Pilih Server!
                 </h1>
-                <p class="text-gray-600 text-lg sm:text-xl">
+                <p class="text-lg text-gray-600 sm:text-xl">
                     Bergabung dengan komunitas lainnya
                 </p>
             </div>
 
             <!-- Server Actions Container - Now Flex -->
-            <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative z-10">
+            <div class="relative z-10 overflow-hidden bg-white border border-gray-100 shadow-2xl rounded-3xl">
                 <div class="flex flex-col lg:flex-row">
                     <!-- Create Server Section -->
                     <div class="flex-1 p-8 sm:p-12">
-                        <div class="text-center mb-8">
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-4">
+                        <div class="mb-8 text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 bg-primary/10 rounded-2xl">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
                             </div>
-                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                            <h2 class="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl">
                                 Buat Server Baru
                             </h2>
                             <p class="text-gray-600">Mulai komunitas kesehatan Anda sendiri</p>
@@ -126,47 +126,66 @@
                                         name="nameServer" 
                                         placeholder="Masukkan nama server..." 
                                         required
-                                        class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-primary focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400 text-center font-medium"
+                                        class="w-full px-6 py-4 font-medium text-center text-gray-800 placeholder-gray-400 transition-all duration-300 border-2 border-gray-200 outline-none bg-gray-50 rounded-2xl focus:border-primary focus:bg-white"
                                     />
                                 </div>
                                 <button 
                                     type="submit"
-                                    class="w-full bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+                                    class="w-full px-8 py-4 text-lg font-bold text-white transition-all duration-300 shadow-lg bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary rounded-2xl hover:scale-105 hover:shadow-xl"
                                 >
                                     Buat Server
                                 </button>
                             </div>
                         </form>
+                        <!-- Error Messages -->
+          <% if (typeof error !== 'undefined' && error) { %>
+            <div class="mt-4 mb-4 text-center">
+              <% if (error === 'exists') { %>
+                <p class="text-lg font-bold text-red-500">
+                  ❌ Server "<%= serverName %>" sudah ada! Silakan pilih nama lain.
+                </p>
+              <% } else if (error === 'empty') { %>
+                <p class="text-lg font-bold text-red-500">
+                  ❌ Nama server tidak boleh kosong!
+                </p>
+              <% } else if (error === 'notfound') { %>
+                <p class="text-lg font-bold text-red-500">
+                  ❌ Server "<%= serverName %>" tidak ditemukan! Periksa nama server.
+                </p>
+              <% } %>
+            </div>
+          <% } %>
+          <!-- End of Error Messages -->
                     </div>
 
                     <!-- Divider for Mobile -->
-                    <div class="lg:hidden relative">
+                    <div class="relative lg:hidden">
                         <div class="absolute inset-0 flex items-center px-8 sm:px-12">
                             <div class="w-full border-t border-gray-200"></div>
                         </div>
                         <div class="relative flex justify-center">
-                            <span class="bg-white px-6 py-2 text-gray-500 font-medium">atau</span>
+                            <span class="px-6 py-2 font-medium text-gray-500 bg-white">atau</span>
                         </div>
                     </div>
 
                     <!-- Vertical Divider for Desktop -->
-                    <div class="hidden lg:flex items-center justify-center w-16">
+                    <div class="items-center justify-center hidden w-16 lg:flex">
                         <div class="flex flex-col items-center">
                             <div class="w-px h-40 bg-gray-200"></div>
-                            <span class="bg-white px-3 py-1 text-gray-500 font-medium text-sm">atau</span>
+                            <span class="px-3 py-1 text-sm font-medium text-gray-500 bg-white">atau</span>
                             <div class="w-px h-40 bg-gray-200"></div>
                         </div>
                     </div>
 
                     <!-- Join Server Section -->
                     <div class="flex-1 p-8 sm:p-12">
-                        <div class="text-center mb-8">
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-2xl mb-4">
+                        <div class="mb-8 text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 bg-blue-50 rounded-2xl">
                                 <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
                             </div>
-                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                            <h2 class="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl">
                                 Bergabung dengan Server
                             </h2>
                             <p class="text-gray-600">Terhubung dengan komunitas yang sudah ada</p>
@@ -180,12 +199,12 @@
                                         name="nameServer" 
                                         placeholder="Masukkan nama server..." 
                                         required
-                                        class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all duration-300 text-gray-800 placeholder-gray-400 text-center font-medium"
+                                        class="w-full px-6 py-4 font-medium text-center text-gray-800 placeholder-gray-400 transition-all duration-300 border-2 border-gray-200 outline-none bg-gray-50 rounded-2xl focus:border-blue-500 focus:bg-white"
                                     />
                                 </div>
                                 <button 
                                     type="submit"
-                                    class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+                                    class="w-full px-8 py-4 text-lg font-bold text-white transition-all duration-300 shadow-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 rounded-2xl hover:scale-105 hover:shadow-xl"
                                 >
                                     Gabung Server
                                 </button>
@@ -195,7 +214,7 @@
                 </div>
 
                 <!-- Bottom Info -->
-                <div class="bg-gray-50 px-8 sm:px-12 py-6 text-center border-t border-gray-100">
+                <div class="px-8 py-6 text-center border-t border-gray-100 bg-gray-50 sm:px-12">
                     <p class="text-sm text-gray-600">
                         💡 <strong>Tips:</strong> Pastikan nama server yang Anda masukkan sudah benar dan tersedia
                     </p>
